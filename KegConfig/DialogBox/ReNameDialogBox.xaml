@@ -1,0 +1,55 @@
+﻿<Window
+    BorderBrush="Black"
+    BorderThickness="4"
+    Height="115"
+    ResizeMode="NoResize"
+    Title="ReNameDialogBox"
+    Width="250"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d"
+    x:Class="KegConfig.DialogBox.ReNameDialogBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid VerticalAlignment="Top">
+            <Label
+                Content="重命名或复制表"
+                Height="30"
+                HorizontalAlignment="Left"
+                Margin="15,0,0,0"
+                x:Name="titleTextBlock" />
+            <Button
+                Background="Transparent"
+                BorderThickness="0"
+                Click="CloseButton_Click"
+                Content="✕"
+                Height="30"
+                HorizontalAlignment="Right"
+                Width="45" />
+        </Grid>
+        <StackPanel
+            Margin="15,0,0,15"
+            Orientation="Horizontal"
+            VerticalAlignment="Bottom">
+            <TextBox
+                Height="24"
+                Margin="0,0,5,0"
+                MinWidth="50"
+                Padding="5,0,5,0"
+                Style="{DynamicResource RoundTextBox}"
+                Tag="新的名称"
+                TextWrapping="Wrap"
+                Width="180"
+                x:Name="nameTextBox" />
+            <Button
+                Click="Button_Click"
+                Content="确定"
+                Height="24"
+                HorizontalAlignment="Left"
+                Style="{DynamicResource RoundButton2}" />
+        </StackPanel>
+    </Grid>
+</Window>

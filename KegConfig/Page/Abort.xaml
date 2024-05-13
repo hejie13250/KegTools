@@ -1,0 +1,59 @@
+﻿<class:BasePage
+  x:Class="KegConfig.Page.Abort"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:KegConfig="clr-namespace:KegConfig"
+  xmlns:class="clr-namespace:KegConfig.Class"
+  xmlns:contorl="clr-namespace:KegConfig.Contorl"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Title="Abort"
+  FontSize="14"
+  TextOptions.TextRenderingMode="ClearType"
+  UseLayoutRounding="True"
+  mc:Ignorable="d">
+
+  <Grid>
+    <ScrollViewer HorizontalAlignment="Left" VerticalScrollBarVisibility="Hidden">
+      <StackPanel x:Name="groupBoxStackPanel" Orientation="Vertical">
+
+        <GroupBox
+          Margin="10,0,10,10"
+          Header="关于"
+          MouseEnter="GroupBox_MouseEnter"
+          Style="{DynamicResource HiddenBorderGroupBoxStyle}">
+          <Border Style="{DynamicResource CustomBorderStyle}">
+            <Grid>
+              <TextBox
+                MaxHeight="200"
+                Margin="10,10,10,10"
+                FontSize="16"
+                Foreground="{DynamicResource TextForeground}"
+                IsReadOnly="True"
+                Style="{DynamicResource RoundTextBox2}"
+                Text="{DynamicResource TextBoxText2}" />
+            </Grid>
+          </Border>
+        </GroupBox>
+        <GroupBox
+          Header="全局设置说明"
+          MouseEnter="GroupBox_MouseEnter"
+          Style="{DynamicResource HiddenBorderGroupBoxStyle}">
+          <Border Margin="0,5,0,25" Style="{DynamicResource CustomBorderStyle}">
+            <Grid>
+              <StackPanel Orientation="Vertical">
+                <TextBox
+                  Margin="10,10,10,10"
+                  FontSize="16"
+                  Foreground="{DynamicResource TextForeground}"
+                  IsReadOnly="True"
+                  Style="{DynamicResource RoundTextBox2}"
+                  Text="{DynamicResource TextBoxText1}" />
+              </StackPanel>
+            </Grid>
+          </Border>
+        </GroupBox>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
+</class:BasePage>
