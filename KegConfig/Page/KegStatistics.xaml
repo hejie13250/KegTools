@@ -14,7 +14,10 @@
   mc:Ignorable="d">
 
   <Grid>
-    <ScrollViewer HorizontalAlignment="Left" VerticalScrollBarVisibility="Hidden">
+    <ScrollViewer
+      Width="790"
+      HorizontalAlignment="Left"
+      VerticalScrollBarVisibility="Hidden">
 
       <StackPanel x:Name="groupBoxStackPanel" Orientation="Vertical">
         <GroupBox
@@ -402,40 +405,46 @@
                   x:Name="dzCheckBox"
                   Grid.Row="1"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
                   IsChecked="False"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
                 <CheckBox
                   x:Name="jjCheckBox"
                   Grid.Row="2"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
                 <CheckBox
                   x:Name="spCheckBox"
                   Grid.Row="3"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
                 <CheckBox
                   x:Name="scCheckBox"
                   Grid.Row="4"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
                 <CheckBox
                   x:Name="sdCheckBox"
                   Grid.Row="5"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
                 <CheckBox
                   x:Name="mcCheckBox"
                   Grid.Row="6"
                   Grid.Column="7"
+                  Height="20"
                   HorizontalAlignment="Left"
-                  Style="{DynamicResource CheckBoxStyle}" Height="20" />
+                  Style="{DynamicResource CheckBoxStyle}" />
 
 
 
@@ -513,10 +522,11 @@
                   Grid.Column="10"
                   Width="70"
                   Height="NaN"
+                  Margin="0,2,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Foreground="{DynamicResource TextForeground}"
-                  Style="{DynamicResource RoundComboBox}" Margin="0,2,0,0">
+                  Style="{DynamicResource RoundComboBox}">
                   <ComboBoxItem Content="15 天" />
                   <ComboBoxItem Content="30 天" />
                   <ComboBoxItem Content="60 天" />

@@ -254,24 +254,26 @@ namespace KegConfig.Page
             GeometrySize = 0,
             IsVisible    = scCheckBox.IsChecked != null && (bool)scCheckBox.IsChecked
           },
-          new LineSeries<double>
+          new ColumnSeries<double>
           {
-              ScalesYAt    = 1,
-              Values       = 数据片段.速度,
-              Name         = "速度（字/分）",
-              Stroke       = new SolidColorPaint(SKColors.Red),
-              Fill         = null,
-              GeometrySize = 0,
-              IsVisible    = sdCheckBox.IsChecked != null && (bool)sdCheckBox.IsChecked
+            ScalesYAt    = 1,
+            Values       = 数据片段.速度,
+            Name         = "速度（字/分）",
+            Stroke       = new SolidColorPaint(new SKColor(217, 59, 108)),
+            MaxBarWidth  = 15,
+            Fill         = new SolidColorPaint(new SKColor(217, 59, 108)),
+            //GeometrySize = 0,
+            IsVisible    = sdCheckBox.IsChecked != null && (bool)sdCheckBox.IsChecked
           },
-          new LineSeries<double>
+          new ColumnSeries<double>
           {
             ScalesYAt    = 2,
             Values       = 数据片段.码长,
             Name         = "码长（码）",
             Stroke       = new SolidColorPaint(SKColors.Blue),
-            Fill         = null,
-            GeometrySize = 0,
+            MaxBarWidth  = 10,
+            Fill         = new SolidColorPaint(SKColors.Blue),
+            //GeometrySize = 0,
             IsVisible    = mcCheckBox.IsChecked != null && (bool)mcCheckBox.IsChecked
           }
         },
@@ -285,8 +287,8 @@ namespace KegConfig.Page
             Labels         =  数据片段.日期,
             LabelsRotation = -30,
             // 颜色和线粗
-            SeparatorsPaint = null,
-            //SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray) { StrokeThickness = 1 },
+            //SeparatorsPaint = null,
+            SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray) { StrokeThickness = 1 },
           }
         },
         YAxes = new Axis[]
@@ -297,12 +299,12 @@ namespace KegConfig.Page
             TextSize    = 12,
             // MinLimit    = 0,    // 设置 Y 轴的最小值为 0
             // MaxLimit    = null, // 设置为 null，以便自动调节最大值
-            SeparatorsPaint = null,
-            //SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray)
-            //{
-            //  StrokeThickness = 1,
-            //  PathEffect      = new DashEffect(new float[] { 3, 8 }) //设为虚线，3和8为实线和留空大小
-            //}
+            //SeparatorsPaint = null,
+            SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray)
+            {
+              StrokeThickness = 1,
+              //PathEffect      = new DashEffect(new float[] { 3, 8 }) //设为虚线，3和8为实线和留空大小
+            }
           },
           new ()
           {
@@ -310,7 +312,7 @@ namespace KegConfig.Page
             //NameTextSize = 14,
             //NamePaint = new SolidColorPaint(SKColors.Red),
             Position    = AxisPosition.End,
-            LabelsPaint = new SolidColorPaint(SKColors.Red),
+            LabelsPaint = new SolidColorPaint(new SKColor(217, 59, 108)),
             TextSize    = 12,
             IsVisible   = sdCheckBox.IsChecked != null && (bool)sdCheckBox.IsChecked,
             SeparatorsPaint = null,

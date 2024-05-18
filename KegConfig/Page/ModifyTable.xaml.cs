@@ -24,6 +24,7 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using LevelDB;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KegConfig.Page
 {
@@ -271,12 +272,39 @@ namespace KegConfig.Page
       if (fontComboBox.SelectedValue == null) return;
 
       var fontName = fontComboBox.SelectedItem.ToString();
-      var font     = new FontFamily(fontName);
-      listView.FontFamily      = font;
-      keyTextBox.FontFamily    = font;
-      valueTextBox.FontFamily  = font;
-      weightTextBox.FontFamily = font;
-      fcTextBox.FontFamily     = font;
+      var customFont     = new FontFamily(fontName);
+      //listView.FontFamily      = customFont;
+      keyTextBox.FontFamily    = customFont;
+      valueTextBox.FontFamily  = customFont;
+      weightTextBox.FontFamily = customFont;
+      fcTextBox.FontFamily     = customFont;
+
+      // 直接修改ListView的FontFamily
+
+      listView.FontFamily = customFont;
+
+      //var itemStyle = listView.ItemContainerStyle;
+      //var newStyle = new Style(typeof(System.Windows.Controls.ListViewItem))
+      //{
+      //  BasedOn = itemStyle
+      //};
+      //if (newStyle != null)
+      //{
+      //  var existingSetter = newStyle.Setters.OfType<Setter>().FirstOrDefault(s => s.Property == System.Windows.Controls.Control.FontFamilyProperty);
+      //  if (existingSetter != null)
+      //    existingSetter.Value = customFont;
+      //  else
+      //    newStyle.Setters.Add(new Setter(System.Windows.Controls.Control.FontFamilyProperty, customFont));
+      //}
+
+      //// 获取当前样式
+      //var originalStyle = listView.ItemContainerStyle;
+      //// 基于原样式创建一个新的样式
+      //var newStyle = new Style { BasedOn = originalStyle };
+      //// 添加或修改新样式中的Setter
+      //newStyle.Setters.Add(new Setter(System.Windows.Controls.Control.FontFamilyProperty, customFont));
+      //// 替换原有样式
+      //listView.ItemContainerStyle = newStyle;
 
       将字体名称写到表内(fontName);
     }

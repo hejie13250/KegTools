@@ -1,4 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <FontFamily x:Key="FontFamilyResource">微软雅黑</FontFamily>
+
+  <Style TargetType="{x:Type TextBlock}">
+    <Setter Property="FontFamily" Value="{DynamicResource FontFamilyResource}" />
+  </Style>
+  <Style TargetType="{x:Type TextBox}">
+    <Setter Property="FontFamily" Value="{DynamicResource FontFamilyResource}" />
+  </Style>
+  <Style TargetType="{x:Type Label}">
+    <Setter Property="FontFamily" Value="{DynamicResource FontFamilyResource}" />
+  </Style>
+
+  <ImageBrush x:Key="DefaultBrush" ImageSource="/background/默认.jpg" />
+
   <Style x:Key="AlphaSliderStyle" TargetType="{x:Type Slider}">
     <Setter Property="Orientation" Value="Vertical" />
     <Setter Property="Template">
@@ -12,7 +27,6 @@
               BorderBrush="Gray"
               BorderThickness="1">
               <Border.Background>
-                <!-- <ImageBrush ImageSource="hue.png" /> -->
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                   <GradientStop Color="#ffFFFFFF" />
                   <GradientStop Offset="1" Color="#00FFFFFF" />
@@ -38,6 +52,47 @@
       </Setter.Value>
     </Setter>
   </Style>
+
+
+  <Style x:Key="ColorAlphaSliderStyle" TargetType="{x:Type Slider}">
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Slider}">
+          <Grid>
+            <Border
+              x:Name="TrackBackground"
+              Height="20"
+              VerticalAlignment="Center"
+              BorderBrush="Gray"
+              BorderThickness="1">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <GradientStop Color="#00FFFFFF" />
+                  <GradientStop Offset="1" Color="#FFFFFFFF" />
+                </LinearGradientBrush>
+              </Border.Background>
+            </Border>
+            <Track x:Name="PART_Track">
+              <Track.Thumb>
+                <Thumb>
+                  <Thumb.Template>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                      <Ellipse
+                        Width="6"
+                        Height="12"
+                        Fill="Red" />
+                    </ControlTemplate>
+                  </Thumb.Template>
+                </Thumb>
+              </Track.Thumb>
+            </Track>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
   <!--<Style x:Key="CustomCheckBoxStyle" TargetType="{x:Type CustomCheckBox}">
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
@@ -632,4 +687,16 @@
       </DrawingGroup>
     </DrawingImage.Drawing>
   </DrawingImage>
+
+  <DrawingImage x:Key="settingDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V1024 H1024 V0 H0 Z">
+        <GeometryDrawing Brush="#FF272636"
+                         Geometry="F1 M1024,1024z M0,0z M128.778,37.217L128.778,37.217 128.778,37.217z M919.684,443.862L878.852,443.862C860.164,443.862,840.403,429.339,834.81,411.423L811.416,354.642C802.667,338.153,806.178,313.929,819.392,300.656L848.321,271.788C861.593,258.516,861.593,236.85,848.321,223.695L800.285,175.72C787.013,162.508,765.409,162.508,752.193,175.72L723.267,204.528C710.056,217.742,685.771,221.374,669.282,212.505L612.44,189.113C594.702,183.577,579.999,163.758,579.999,145.128L579.999,104.296C579.999,85.666,564.704,70.31,546.074,70.31L478.162,70.31C459.47,70.31,444.173,85.665,444.173,104.296L444.173,145.129C444.173,163.759,429.65,183.638,411.734,189.234L354.893,212.506C338.404,221.315,314.18,217.744,300.966,204.529L271.981,175.603C258.829,162.388,237.221,162.388,224.006,175.603L175.976,223.576C162.701,236.85,162.701,258.516,175.976,271.669L204.841,300.537C218.056,313.809,221.624,338.036,212.818,354.522L189.426,411.423C183.831,429.339,164.009,443.862,145.382,443.862L104.669,443.862C85.8609999999998,443.862,70.5629999999998,459.159,70.5629999999998,477.908L70.5629999999998,545.7C70.5629999999998,564.452,85.8599999999998,579.689,104.609,579.689L145.381,579.689C164.009,579.807,183.772,594.33,189.366,612.246L212.818,669.087C221.567,685.576,218.056,709.92,204.841,723.013L175.913,751.883C162.701,765.215,162.701,786.82,175.913,799.975L224.006,848.009C237.22,861.28,258.829,861.28,271.981,848.009L300.966,819.139C314.063,805.928,338.347,802.355,354.715,811.222L411.735,834.614C429.651,840.151,444.174,859.972,444.174,878.659L444.174,919.256C444.174,937.882,459.471,953.239,478.163,953.239L546.075,953.239C564.644,953.239,580,937.882,580,919.256L580,878.66C580,859.973,594.703,840.151,612.441,834.615L669.34,811.223C685.828,802.356,710.172,805.929,723.386,819.14L752.134,848.01C765.407,861.281,787.012,861.281,800.228,848.01L848.259,799.976C861.531,786.702,861.531,765.155,848.259,751.884L819.331,723.014C806.12,709.921,802.548,685.576,811.357,669.088L834.747,612.247C840.342,594.331,860.163,579.808,878.795,579.808L919.566,579.808C938.138,579.808,953.432,564.511,953.432,545.821L953.432,477.908C953.553,459.159,938.256,443.862,919.684,443.862 M681.962,511.775C681.962,605.64 606.012,681.527 512.267,681.527 418.346,681.527 342.396,605.64 342.396,511.775 342.396,418.031 418.404,342.023 512.267,342.023 606.011,342.023 681.962,418.031 681.962,511.775" />
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+
+
 </ResourceDictionary>

@@ -105,13 +105,14 @@ namespace KegConfig.Page
     }
 
     // 用于 listView 数据绑定
-    private ObservableCollection<列表项> 查找列表 { get; set; }
-    private ObservableCollection<列表项> 外部工具 { get; set; }
-    private ObservableCollection<列表项> 快键命令 { get; set; }
-    private ObservableCollection<列表项> 自动关机 { get; set; }
-    private ObservableCollection<列表项> 快键   { get; set; }
-    private ObservableCollection<列表项> 自启   { get; set; }
-    private 状态条                       设置项  { get; set; }
+    private 状态条                       状态条_设置项  { get; set; }
+    private ObservableCollection<列表项> 列表_查找列表 { get; set; }
+    private ObservableCollection<列表项> 列表_外部工具 { get; set; }
+    private ObservableCollection<列表项> 列表_快键命令 { get; set; }
+    private ObservableCollection<列表项> 列表_全局快键命令 { get; set; }
+    private ObservableCollection<列表项> 列表_快键   { get; set; }
+    private ObservableCollection<列表项> 列表_自启   { get; set; }
+    private ObservableCollection<列表项> 列表_自动关机 { get; set; }
 
 
     // 用于存放 全局设置.json
@@ -121,6 +122,7 @@ namespace KegConfig.Page
       public ObservableCollection<列表项> 查找列表 { get; set; }
       public ObservableCollection<列表项> 外部工具 { get; set; }
       public ObservableCollection<列表项> 快键命令 { get; set; }
+      public ObservableCollection<列表项> 全局快键命令 { get; set; }
       public ObservableCollection<列表项> 快键 { get; set; }
       public ObservableCollection<列表项> 自启 { get; set; }
       public ObservableCollection<列表项> 自动关机 { get; set; }
@@ -133,6 +135,7 @@ namespace KegConfig.Page
       查找列表 = new ObservableCollection<列表项>(),
       外部工具 = new ObservableCollection<列表项>(),
       快键命令 = new ObservableCollection<列表项>(),
+      全局快键命令 = new ObservableCollection<列表项>(),
       快键 = new ObservableCollection<列表项>(),
       自启 = new ObservableCollection<列表项>()
     };
@@ -179,19 +182,21 @@ namespace KegConfig.Page
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e)
     {
-      查找列表 = new ObservableCollection<列表项>();
-      外部工具 = new ObservableCollection<列表项>();
-      快键命令 = new ObservableCollection<列表项>();
-      快键 = new ObservableCollection<列表项>();
-      自启 = new ObservableCollection<列表项>();
-      自动关机 = new ObservableCollection<列表项>();
+      列表_查找列表 = new ObservableCollection<列表项>();
+      列表_外部工具 = new ObservableCollection<列表项>();
+      列表_快键命令 = new ObservableCollection<列表项>();
+      列表_全局快键命令 = new ObservableCollection<列表项>();
+      列表_快键 = new ObservableCollection<列表项>();
+      列表_自启 = new ObservableCollection<列表项>();
+      列表_自动关机 = new ObservableCollection<列表项>();
 
-      listView3.DataContext = 查找列表;
-      listView8.DataContext = 外部工具;
-      listView4.DataContext = 快键命令;
-      listView5.DataContext = 快键;
-      listView6.DataContext = 自启;
-      listView7.DataContext = 自动关机;
+      listView3.DataContext = 列表_查找列表;
+      listView8.DataContext = 列表_外部工具;
+      listView4.DataContext = 列表_快键命令;
+      listView9.DataContext = 列表_全局快键命令;
+      listView5.DataContext = 列表_快键;
+      listView6.DataContext = 列表_自启;
+      listView7.DataContext = 列表_自动关机;
 
       DataContext = this;
       LoadKegSkinImages();  // 读取 读取状态条皮肤图片
@@ -222,8 +227,8 @@ namespace KegConfig.Page
       var invertedColor = Color.FromArgb(255, (byte)~currentColor.R, (byte)~currentColor.G, (byte)~currentColor.B);
       label.BorderThickness = new Thickness(3);
       label.BorderBrush     = new SolidColorBrush(invertedColor);
-      var hex = RemoveChars(label.Background.ToString(), 2);
-      var rgb = HexToRgb(hex);
+      var hex = Base.RemoveChars(label.Background.ToString(), 2);
+      var rgb = Base.HexToRgb(hex);
       rgbTextBox.RGBText = rgb;
     }
 
@@ -308,12 +313,13 @@ namespace KegConfig.Page
     private void Default_button_Click(object sender, RoutedEventArgs e)
     {
       File.Delete(_globalSettingFilePath);
-      查找列表.Clear();
-      外部工具.Clear();
-      快键命令.Clear();
-      快键.Clear();
-      自启.Clear();
-      自动关机.Clear();
+      列表_查找列表.Clear();
+      列表_外部工具.Clear();
+      列表_快键命令.Clear();
+      列表_全局快键命令.Clear();
+      列表_快键.Clear();
+      列表_自启.Clear();
+      列表_自动关机.Clear();
       LoadKegTxt(_kegBakPath);
     }
 
@@ -340,29 +346,6 @@ namespace KegConfig.Page
     }
 
 
-    // 颜色转换 HexToRgb：(255, 255, 255)
-    private static string HexToRgb(string hex)
-    {
-      // 预期hex字符串格式如 "FF8000" 或 "#FF8000"
-      hex = hex.Replace("#", ""); // 移除可能存在的井号
-      byte r, g, b;
-      if (hex.Length == 6)
-      {
-        r = Convert.ToByte(hex.Substring(0, 2), 16);
-        g = Convert.ToByte(hex.Substring(2, 2), 16);
-        b = Convert.ToByte(hex.Substring(4, 2), 16);
-      }
-      else
-      {
-        r = Convert.ToByte(hex.Substring(2, 2), 16);
-        g = Convert.ToByte(hex.Substring(4, 2), 16);
-        b = Convert.ToByte(hex.Substring(6, 2), 16);
-      }
-      return $"({r}, {g}, {b})";
-    }
-
-
-
     // 保存 Keg.txt
     private void SaveKeg()
     {
@@ -370,8 +353,8 @@ namespace KegConfig.Page
       kegText += $"《提示文本的位置={取提示文本的位置()}》\n";
       kegText += $"《提示文本要隐藏吗？={要或不要(checkBox3_Copy.IsChecked != null && (bool)checkBox3_Copy.IsChecked)}》\n";
       kegText += $"《提示文本要显示中英以及大小写状态吗？={要或不要(checkBox3_Copy1.IsChecked != null && (bool)checkBox3_Copy1.IsChecked)}》\n";
-      kegText += $"《提示文本中文字体色={HexToRgb(color_Label_1.Background.ToString())}》\n";
-      kegText += $"《提示文本英文字体色={HexToRgb(color_Label_2.Background.ToString())}》\n";
+      kegText += $"《提示文本中文字体色={Base.HexToRgb(color_Label_1.Background.ToString())}》\n";
+      kegText += $"《提示文本英文字体色={Base.HexToRgb(color_Label_2.Background.ToString())}》\n";
       kegText += $"《提示文本字体大小={nud23.Value}》\n";
       kegText += $"《提示文本字体名称={textBox_Copy24.Text}》\n";
       kegText += $"《打字字数统计等数据是要保存在主程文件夹下吗？={是或不是(checkBox3_Copy3.IsChecked != null && (bool)checkBox3_Copy3.IsChecked)}》\n";
@@ -382,27 +365,31 @@ namespace KegConfig.Page
       kegText += $"《深夜锁屏解锁密码前缀={mmTextBox.Text}》\n";
 
       kegText += "\n在线查找\n";
-      kegText =  查找列表.Where(item => item.Enable).Aggregate(kegText, (current, item)
+      kegText =  列表_查找列表.Where(item => item.Enable).Aggregate(kegText, (current, item)
         => current + $"《在线查找={item.Name}::{item.Value}》\n");
 
       kegText += "\n外部工具动态菜单\n";
-      kegText =  外部工具.Where(item => item.Enable).Aggregate(kegText, (current, item)
+      kegText =  列表_外部工具.Where(item => item.Enable).Aggregate(kegText, (current, item)
         => current + $"《外部工具={item.Name}:{item.Value}》\n");
 
+      kegText += "\n运行全局命令行快键\n";
+      kegText = 列表_全局快键命令.Where(item => item.Enable).Aggregate(kegText, (current, item)
+        => current + $"《运行全局命令行快键={item.Value}<命令行={item.Cmd}>》\n");
+
       kegText += "\n运行命令行快键\n";
-      kegText =  快键命令.Where(item => item.Enable).Aggregate(kegText, (current, item) 
+      kegText =  列表_快键命令.Where(item => item.Enable).Aggregate(kegText, (current, item) 
         => current + $"《运行命令行快键={item.Value}<命令行={item.Cmd}>》\n");
 
       kegText += "\n快键\n";
-      kegText =  快键.Where(item => item.Enable).Aggregate(kegText, (current, item) 
+      kegText =  列表_快键.Where(item => item.Enable).Aggregate(kegText, (current, item) 
         => current + $"《{item.Name}={item.Value}》\n");
 
       kegText += "\n自启\n";
-      kegText =  自启.Where(item => item.Enable).Aggregate(kegText, (current, item) 
+      kegText =  列表_自启.Where(item => item.Enable).Aggregate(kegText, (current, item) 
         => current + $"《自启={item.Value}》\n");
 
       kegText += "\n自动关机\n";
-      foreach (var item in 自动关机)
+      foreach (var item in 列表_自动关机)
         if (item.Enable)
         {
           var str = item.Value.Split(':');
@@ -520,7 +507,7 @@ namespace KegConfig.Page
           Value = match.Groups[2].Value,
           Cmd = "",
         };
-        查找列表.Add(item);
+        列表_查找列表.Add(item);
       }
 
       pattern = "《外部工具=(.*?):(.*)》";
@@ -536,10 +523,37 @@ namespace KegConfig.Page
             Value = match.Groups[2].Value,
             Cmd = "",
           };
-          外部工具.Add(item);
+          列表_外部工具.Add(item);
         }
       }
 
+      pattern = "《(运行全局命令行快键)=(.*)<命令行=(.*)>》";
+      matches = Regex.Matches(kegText, pattern);
+      if (matches.Count > 0)
+      {
+        foreach (Match match in matches)
+        {
+          var item = new 列表项
+          {
+            Enable = true,
+            Name = match.Groups[1].Value,
+            Value = match.Groups[2].Value,
+            Cmd = match.Groups[3].Value,
+          };
+          列表_全局快键命令.Add(item);
+        }
+      }
+      else
+      {
+        var item = new 列表项
+        {
+          Enable = false,
+          Name = "运行全局命令行快键=",
+          Value = "",
+          Cmd = "",
+        };
+        列表_全局快键命令.Add(item);
+      }
 
       pattern = "《(运行命令行快键)=(.*)<命令行=(.*)>》";
       matches = Regex.Matches(kegText, pattern);
@@ -554,7 +568,7 @@ namespace KegConfig.Page
             Value = match.Groups[2].Value,
             Cmd = match.Groups[3].Value,
           };
-          快键命令.Add(item);
+          列表_快键命令.Add(item);
         }
       }
       else
@@ -566,7 +580,7 @@ namespace KegConfig.Page
           Value = "",
           Cmd = "",
         };
-        快键命令.Add(item);
+        列表_快键命令.Add(item);
       }
 
       pattern = "《(?!.*命令行快键)(.*快键)=(.*)》";
@@ -580,7 +594,7 @@ namespace KegConfig.Page
           Value = match.Groups[2].Value,
           Cmd = "",
         };
-        快键.Add(item);
+        列表_快键.Add(item);
       }
 
       pattern = "《(自启)=(.*)》";
@@ -596,7 +610,7 @@ namespace KegConfig.Page
             Value = match.Groups[2].Value,
             Cmd = "",
           };
-          自启.Add(item);
+          列表_自启.Add(item);
         }
       }
       else
@@ -608,7 +622,7 @@ namespace KegConfig.Page
           Value = "",
           Cmd = "",
         };
-        自启.Add(item);
+        列表_自启.Add(item);
       }
 
 
@@ -625,7 +639,7 @@ namespace KegConfig.Page
             Value = match.Groups[2].Value == "" ? "22:30" : match.Groups[2].Value,
             Cmd = "",
           };
-          自动关机.Add(item);
+          列表_自动关机.Add(item);
         }
       }
       else
@@ -637,14 +651,14 @@ namespace KegConfig.Page
           Value = "22:30",
           Cmd = "",
         };
-        自动关机.Add(item);
+        列表_自动关机.Add(item);
       }
     }
 
     // 保存文件 全局设置.json
     private void SaveGlobalSettingJson()
     {
-      设置项 = new 状态条
+      状态条_设置项 = new 状态条
       {
         提示文本字体大小              = nud23.Value,
         提示文本字体名称              = textBox_Copy24.Text,
@@ -657,19 +671,20 @@ namespace KegConfig.Page
         深夜锁屏起始点                = nud1.Value,
         深夜锁屏结束点                = nud1.Value,
         深夜锁屏解锁密码前缀          = mmTextBox.Text,
-        提示文本中文字体色            = RemoveChars(color_Label_1.Background.ToString(), 2),
-        提示文本英文字体色            = RemoveChars(color_Label_2.Background.ToString(), 2),
+        提示文本中文字体色            = Base.RemoveChars(color_Label_1.Background.ToString(), 2),
+        提示文本英文字体色            = Base.RemoveChars(color_Label_2.Background.ToString(), 2),
       };
 
       _全局设置 = new()
       {
-        状态栏和其它设置 = 设置项,
-        查找列表 = 查找列表,
-        外部工具 = 外部工具,
-        快键命令 = 快键命令,
-        快键 = 快键,
-        自启 = 自启,
-        自动关机 = 自动关机
+        状态栏和其它设置 = 状态条_设置项,
+        查找列表 = 列表_查找列表,
+        外部工具 = 列表_外部工具,
+        快键命令 = 列表_快键命令,
+        全局快键命令 = 列表_全局快键命令,
+        快键 = 列表_快键,
+        自启 = 列表_自启,
+        自动关机 = 列表_自动关机
       };
 
       var jsonString = JsonConvert.SerializeObject(_全局设置, Formatting.Indented);
@@ -686,6 +701,7 @@ namespace KegConfig.Page
         查找列表 = new ObservableCollection<列表项>(),
         外部工具 = new ObservableCollection<列表项>(),
         快键命令 = new ObservableCollection<列表项>(),
+        全局快键命令 = new ObservableCollection<列表项>(),
         快键 = new ObservableCollection<列表项>(),
         自启 = new ObservableCollection<列表项>(),
         自动关机 = new ObservableCollection<列表项>()
@@ -694,47 +710,42 @@ namespace KegConfig.Page
       // 读取整个文件内容,将JSON字符串反序列化为对象
       var jsonString = File.ReadAllText(_globalSettingFilePath);
       _全局设置 = JsonConvert.DeserializeObject<GlobalSettings>(jsonString);
-      查找列表 = _全局设置.查找列表;
-      外部工具 = _全局设置.外部工具;
-      快键命令 = _全局设置.快键命令;
-      快键 = _全局设置.快键;
-      自启 = _全局设置.自启;
-      自动关机 = _全局设置.自动关机;
-      设置项 = _全局设置.状态栏和其它设置;
+      列表_查找列表 = _全局设置.查找列表;
+      列表_外部工具 = _全局设置.外部工具;
+      列表_快键命令 = _全局设置.快键命令;
+      列表_全局快键命令 = _全局设置.全局快键命令;
+      列表_快键 = _全局设置.快键;
+      列表_自启 = _全局设置.自启;
+      列表_自动关机 = _全局设置.自动关机;
+      状态条_设置项 = _全局设置.状态栏和其它设置;
 
-      if (设置项 != null)
+      if (状态条_设置项 != null)
       {
-        提示文本的位置(设置项.提示文本的位置);
-        checkBox3_Copy.IsChecked  = 设置项.提示文本要隐藏吗;
-        nud23.Value               = 设置项.提示文本字体大小;
-        textBox_Copy24.Text       = 设置项.提示文本字体名称;
-        checkBox3_Copy4.IsChecked = 设置项.要启用深夜锁屏吗;
-        checkBox3_Copy1.IsChecked = 设置项.提示文本要显示中英以及大小写状态吗;
-        checkBox3_Copy2.IsChecked = 设置项.快键只在候选窗口显示情况下才起作用吗;
-        checkBox3_Copy3.IsChecked = 设置项.打字字数统计等数据是要保存在主程文件夹下吗;
-        nud1.Value                = 设置项.深夜锁屏起始点;
-        nud2.Value                = 设置项.深夜锁屏结束点;
-        mmTextBox.Text            = 设置项.深夜锁屏解锁密码前缀;
-        color_Label_1.Background  = new SolidColorBrush((Color)ColorConverter.ConvertFromString(设置项.提示文本中文字体色)!);
-        color_Label_2.Background  = new SolidColorBrush((Color)ColorConverter.ConvertFromString(设置项.提示文本英文字体色)!);
+        提示文本的位置(状态条_设置项.提示文本的位置);
+        checkBox3_Copy.IsChecked  = 状态条_设置项.提示文本要隐藏吗;
+        nud23.Value               = 状态条_设置项.提示文本字体大小;
+        textBox_Copy24.Text       = 状态条_设置项.提示文本字体名称;
+        checkBox3_Copy4.IsChecked = 状态条_设置项.要启用深夜锁屏吗;
+        checkBox3_Copy1.IsChecked = 状态条_设置项.提示文本要显示中英以及大小写状态吗;
+        checkBox3_Copy2.IsChecked = 状态条_设置项.快键只在候选窗口显示情况下才起作用吗;
+        checkBox3_Copy3.IsChecked = 状态条_设置项.打字字数统计等数据是要保存在主程文件夹下吗;
+        nud1.Value                = 状态条_设置项.深夜锁屏起始点;
+        nud2.Value                = 状态条_设置项.深夜锁屏结束点;
+        mmTextBox.Text            = 状态条_设置项.深夜锁屏解锁密码前缀;
+        color_Label_1.Background  = new SolidColorBrush((Color)ColorConverter.ConvertFromString(状态条_设置项.提示文本中文字体色)!);
+        color_Label_2.Background  = new SolidColorBrush((Color)ColorConverter.ConvertFromString(状态条_设置项.提示文本英文字体色)!);
       }
 
-      listView3.ItemsSource = 查找列表; // ListView的数据
-      listView8.ItemsSource = 外部工具;
-      listView4.ItemsSource = 快键命令;
-      listView5.ItemsSource = 快键;
-      listView6.ItemsSource = 自启;
-      listView7.ItemsSource = 自动关机;
-
+      listView3.ItemsSource = 列表_查找列表; // ListView的数据
+      listView8.ItemsSource = 列表_外部工具;
+      listView4.ItemsSource = 列表_快键命令;
+      listView9.ItemsSource = 列表_全局快键命令;
+      listView5.ItemsSource = 列表_快键;
+      listView6.ItemsSource = 列表_自启;
+      listView7.ItemsSource = 列表_自动关机;
     }
 
 
-    // Hex格式 ARGB 转 RGB，如 #FFAABBCC -> #AABBCC
-    private static string RemoveChars(string str, int n)
-    {
-      str = str.Replace("#", ""); // 移除可能存在的井号
-      return "#" + str.Substring(2, str.Length - n);
-    }
 
 
 
@@ -886,12 +897,13 @@ namespace KegConfig.Page
       if (result != MessageBoxResult.OK) return;
       switch (listViewNum)
       {
-        case 3: 查找列表.Remove(listViewItem); break;
-        case 4: 快键命令.Remove(listViewItem); break;
-        case 5: 快键.Remove(listViewItem); break;
-        case 6: 自启.Remove(listViewItem); break;
-        case 7: 自动关机.Remove(listViewItem); break;
-        case 8: 外部工具.Remove(listViewItem); break;
+        case 3: 列表_查找列表.Remove(listViewItem); break;
+        case 4: 列表_快键命令.Remove(listViewItem); break;
+        case 9: 列表_全局快键命令.Remove(listViewItem); break;
+        case 5: 列表_快键.Remove(listViewItem); break;
+        case 6: 列表_自启.Remove(listViewItem); break;
+        case 7: 列表_自动关机.Remove(listViewItem); break;
+        case 8: 列表_外部工具.Remove(listViewItem); break;
       }
     }
 
@@ -915,16 +927,19 @@ namespace KegConfig.Page
       };
 
       switch(btn.Content){
-        case "添加在线查找": 查找列表.Insert(0, item); FocusAndSelect(listView3); break;
-        case "添加快捷命令": item.Name = "运行命令行快键";
-                             快键命令.Insert(0, item); FocusAndSelect(listView4); break;
-        case "添加快捷键"  : item.Name = (comboBox4.SelectedItem as ComboBoxItem)?.Content?.ToString(); 
-                             快键.Insert(0, item); FocusAndSelect(listView5); break;
-        case "添加自启应用": item.Name = "自启";
-                             自启.Insert(0, item); FocusAndSelect(listView6); break;
-        case "添加定时关机": item.Name = "自动关机"; item.Value = "22:30";
-                             自动关机.Insert(0, item); FocusAndSelect(listView7); break;
-        case "添加外部工具": 外部工具.Insert(0, item); FocusAndSelect(listView8); break;
+        case "在线查找": 列表_查找列表.Add(item); FocusAndSelect(listView3); break;
+        case "快捷命令": item.Name = "运行命令行快键";
+                             列表_快键命令.Add(item); FocusAndSelect(listView4); break;
+        case "全局快捷命令":
+                             item.Name = "运行全局命令行快键";
+                             列表_全局快键命令.Add(item); FocusAndSelect(listView9); break;
+        case "快捷键"  : item.Name = (comboBox4.SelectedItem as ComboBoxItem)?.Content?.ToString(); 
+                             列表_快键.Add(item); FocusAndSelect(listView5); break;
+        case "自启应用": item.Name = "自启";
+                             列表_自启.Add(item); FocusAndSelect(listView6); break;
+        case "定时关机": item.Name = "自动关机"; item.Value = "22:30";
+                             列表_自动关机.Add(item); FocusAndSelect(listView7); break;
+        case "外部工具": 列表_外部工具.Add(item); FocusAndSelect(listView8); break;
       }
     }
 
@@ -932,7 +947,7 @@ namespace KegConfig.Page
     {
       // 设置焦点并选择第一项
       listView.Focus();
-      listView.SelectedIndex = 0;
+      listView.SelectedIndex = listView.Items.Count - 1;
     }
 
 
@@ -1077,8 +1092,13 @@ namespace KegConfig.Page
 
 
 
+
     #endregion
 
-
+    private void listView_LostFocus(object sender, RoutedEventArgs e)
+    {
+      var lv = (ListView)sender;
+      lv.SelectedIndex = -1;
+    }
   }
 }

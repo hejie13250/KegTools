@@ -1,7 +1,22 @@
 ﻿using System.Reflection;
+using System.Windows.Controls;
+using System.Windows;
 using GroupBox = System.Windows.Controls.GroupBox;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Path = System.IO.Path;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Media.Effects;
+using System;
+using System.IO.Ports;
+using System.Windows.Media;
+using Brushes = System.Drawing.Brushes;
+using Color = System.Windows.Media.Color;
+using KegConfig.Contorl;
+using KegConfig.Class;
+using System.Windows.Input;
+using System.Text.RegularExpressions;
+using FontFamily = System.Windows.Media.FontFamily;
 
 namespace KegConfig.Page
 {
@@ -19,14 +34,14 @@ namespace KegConfig.Page
 
     #endregion
 
-    private readonly string _appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
 
     public Abort()
     {
       InitializeComponent();
-
     }
+
+
 
   }
 }

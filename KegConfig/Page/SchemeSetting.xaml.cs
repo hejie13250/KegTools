@@ -484,6 +484,8 @@ namespace KegConfig.Page
           case "码表引导快键2编码名1":              设置引导码表设置("码表引导快键2编码名1", value); break;
           case "非编码串首位的大键盘码元":             textBox_Copy7.Text           = value; break;
           case "非编码串首位的小键盘码元":             textBox_Copy8.Text           = value; break;
+          case "连续的大键盘码元": textBox_8.Text = value; break;
+          case "连续的小键盘码元": textBox_9.Text = value; break;
           case "大键盘按下Shift的中文标点串":         textBox_Copy69.Text          = value; break;
           case "往上翻页大键盘英文符号编码串":           textBox_Copy21.Text          = value; break;
           case "往下翻页大键盘英文符号编码串":           textBox_Copy2.Text           = value; break;
@@ -510,6 +512,7 @@ namespace KegConfig.Page
           case "要数字顶屏吗？":                  checkBox1_Copy7.IsChecked    = IsTrueOrFalse(value); break;
           case "要标点顶屏吗？":                  checkBox1_Copy6.IsChecked    = IsTrueOrFalse(value); break;
           case "要唯一上屏吗？":                  checkBox1_Copy5.IsChecked    = IsTrueOrFalse(value); break;
+          case "词条后缀_顶屏吗？":               checkBox_5.IsChecked         = IsTrueOrFalse(value); break;
           case "嵌入下划线色":                   color_Label_1.Background     = RgbStringToColor(value); break;
           case "候选窗口边框色":                  color_Label_4.Background     = RgbStringToColor(value); break;
           case "候选选中字体色":                  color_Label_7.Background     = RgbStringToColor(value); break;
@@ -905,6 +908,8 @@ namespace KegConfig.Page
       ReplaceConfig("GDI字体加粗权值",        nud14_Copy.Value.ToString());
       ReplaceConfig("非编码串首位的大键盘码元",     textBox_Copy7.Text);
       ReplaceConfig("非编码串首位的小键盘码元",     textBox_Copy8.Text);
+      ReplaceConfig("连续的大键盘码元", textBox_8.Text);
+      ReplaceConfig("连续的小键盘码元", textBox_9.Text);
       ReplaceConfig("窗口四个角的圆角半径",       nud11.Value.ToString());
       ReplaceConfig("选中项四个角的圆角半径",      nud12.Value.ToString());
       ReplaceConfig("大键盘按下Shift的中文标点串", textBox_Copy69.Text);
@@ -913,23 +918,24 @@ namespace KegConfig.Page
       ReplaceConfig("往下翻页小键盘英文符号编码串",   textBox_Copy4.Text);
       ReplaceConfig("往上翻页大键盘英文符号编码串",   textBox_Copy21.Text);
       ReplaceConfig("词语联想上屏字符串长度",      取词语联想上屏字符串长度());
-      ReplaceConfig("光标色",              HexToRgb(color_Label_2.Background.ToString()));
+      ReplaceConfig("光标色",              Base.HexToRgb(color_Label_2.Background.ToString()));
       ReplaceConfig("候选窗口候选排列方向模式",     取候选窗口候选排列方向模式());
       ReplaceConfig("要显示逐码提示吗？",        要或不要(checkBox.IsChecked != null && (bool)checkBox.IsChecked));
-      ReplaceConfig("分隔线色",             HexToRgb(color_Label_3.Background.ToString()));
+      ReplaceConfig("分隔线色",             Base.HexToRgb(color_Label_3.Background.ToString()));
 
       ReplaceConfig("要显示反查提示吗？", 要或不要(checkBox1.IsChecked != null && (bool)checkBox1.IsChecked));
       ReplaceConfig("要数字顶屏吗？", 要或不要(checkBox1_Copy7.IsChecked != null && (bool)checkBox1_Copy7.IsChecked));
       ReplaceConfig("要标点顶屏吗？", 要或不要(checkBox1_Copy6.IsChecked != null && (bool)checkBox1_Copy6.IsChecked));
       ReplaceConfig("要唯一上屏吗？", 要或不要(checkBox1_Copy5.IsChecked != null && (bool)checkBox1_Copy5.IsChecked));
+      ReplaceConfig("词条后缀_顶屏吗？", 要或不要(checkBox_5.IsChecked != null && (bool)checkBox_5.IsChecked));
       ReplaceConfig("码表标签显示模式", comboBox1_Copy.SelectedIndex.ToString());
-      ReplaceConfig("候选选中色", HexToRgb(color_Label_6.Background.ToString()));
+      ReplaceConfig("候选选中色", Base.HexToRgb(color_Label_6.Background.ToString()));
       ReplaceConfig("要逐码提示检索吗？", 要或不要(checkBox_Copy.IsChecked != null && (bool)checkBox_Copy.IsChecked));
       ReplaceConfig("要显示背景图吗？", 要或不要(checkBox_Copy42.IsChecked != null && (bool)checkBox_Copy42.IsChecked));
       ReplaceConfig("无候选要清屏吗？", 要或不要(checkBox_Copy20.IsChecked != null && (bool)checkBox_Copy20.IsChecked));
       ReplaceConfig("要启用双检索吗？", 要或不要(checkBox1_Copy3.IsChecked != null && (bool)checkBox1_Copy3.IsChecked));
       ReplaceConfig("要码长顶屏吗？", 要或不要(checkBox1_Copy111.IsChecked != null && (bool)checkBox1_Copy111.IsChecked));
-      ReplaceConfig("嵌入下划线色", HexToRgb(color_Label_1.Background.ToString()));
+      ReplaceConfig("嵌入下划线色", Base.HexToRgb(color_Label_1.Background.ToString()));
       ReplaceConfig("关联中文标点吗？", 要或不要(checkBox_Copy31 != null && (bool)checkBox_Copy31.IsChecked));
       ReplaceConfig("要启用单字模式吗？", 要或不要(checkBox1_Copy != null && (bool)checkBox1_Copy.IsChecked));
       ReplaceConfig("窗口四个角要圆角吗？", 要或不要(hxc_CheckBox != null && (bool)hxc_CheckBox.IsChecked));
@@ -937,8 +943,8 @@ namespace KegConfig.Page
       ReplaceConfig("要启用左Ctrl键吗？", 要或不要(checkBox_Copy15 != null && (bool)checkBox_Copy15.IsChecked));
       ReplaceConfig("要启用右Ctrl键吗？", 要或不要(checkBox_Copy16 != null && (bool)checkBox_Copy16.IsChecked));
       ReplaceConfig("要显示键首字根吗？", 要或不要(checkBox_Copy34 != null && (bool)checkBox_Copy34.IsChecked));
-      ReplaceConfig("候选窗口边框色", HexToRgb(color_Label_4.Background.ToString()));
-      ReplaceConfig("候选选中字体色", HexToRgb(color_Label_7.Background.ToString()));
+      ReplaceConfig("候选窗口边框色", Base.HexToRgb(color_Label_4.Background.ToString()));
+      ReplaceConfig("候选选中字体色", Base.HexToRgb(color_Label_7.Background.ToString()));
       ReplaceConfig("超过码长要清屏吗？", 要或不要(checkBox_Copy19 != null && (bool)checkBox_Copy19.IsChecked));
       ReplaceConfig("GDI字体要倾斜吗？", 要或不要(checkBox_Copy314 != null && (bool)checkBox_Copy314.IsChecked));
       ReplaceConfig("要使用嵌入模式吗？", 要或不要(checkBox_Copy44 != null && (bool)checkBox_Copy44.IsChecked));
@@ -994,7 +1000,7 @@ namespace KegConfig.Page
     }
     private string 取背景底色()
     {
-      return hxcds_CheckBox.IsChecked == true ? "" : HexToRgb(color_Label_5.Background.ToString());
+      return hxcds_CheckBox.IsChecked == true ? "" : Base.HexToRgb(color_Label_5.Background.ToString());
     }
     private string 取候选窗口绘制模式()
     {
@@ -1091,45 +1097,21 @@ namespace KegConfig.Page
       }
     }
 
-    // Hex格式 ARGB 转 RGB，如 #FFAABBCC -> #AABBCC
-    private static string RemoveChars(string str, int n)
-    {
-      str = str.Replace("#", ""); // 移除可能存在的井号
-      return "#" + str.Substring(2, str.Length - n);
-    }
+
 
 
     // 更新所有候选字色（改为同一个颜色）
     private void HXZ_TextBoxText()
     {
-      var rgb1 = HexToRgb(color_Label_8.Background.ToString());
-      var rgb2 = HexToRgb(color_Label_9.Background.ToString());
+      var rgb1 = Base.HexToRgb(color_Label_8.Background.ToString());
+      var rgb2 = Base.HexToRgb(color_Label_9.Background.ToString());
 
       _bgString = $"<0={rgb1}>";
       for (var i = 1; i <= 26; i++)
         _bgString += $"<{i}={rgb2}>";
     }
 
-    // 颜色转换 HexToRgb：(255, 255, 255)
-    private static string HexToRgb(string hex)
-    {
-      // 预期hex字符串格式如 "FF8000" 或 "#FF8000"
-      hex = hex.Replace("#", ""); // 移除可能存在的井号
-      byte r, g, b;
-      if (hex.Length == 6)
-      {
-        r = Convert.ToByte(hex.Substring(0, 2), 16);
-        g = Convert.ToByte(hex.Substring(2, 2), 16);
-        b = Convert.ToByte(hex.Substring(4, 2), 16);
-      }
-      else
-      {
-        r = Convert.ToByte(hex.Substring(2, 2), 16);
-        g = Convert.ToByte(hex.Substring(4, 2), 16);
-        b = Convert.ToByte(hex.Substring(6, 2), 16);
-      }
-      return $"({r}, {g}, {b})";
-    }
+
 
     // 显示颜色的 label 鼠标进入事件
     private void Color_label_MouseEnter(object sender, MouseEventArgs e)
@@ -1190,8 +1172,8 @@ namespace KegConfig.Page
       var invertedColor = Color.FromArgb(255, (byte)~currentColor.R, (byte)~currentColor.G, (byte)~currentColor.B);
       lb.BorderThickness = new Thickness(3);
       lb.BorderBrush     = new SolidColorBrush(invertedColor);
-      var hex = RemoveChars(lb.Background.ToString(), 2);
-      var rgb = HexToRgb(hex);
+      var hex = Base.RemoveChars(lb.Background.ToString(), 2);
+      var rgb = Base.HexToRgb(hex);
       rgbTextBox.RGBText = rgb;
     }
 
@@ -1324,15 +1306,15 @@ namespace KegConfig.Page
         显示候选窗圆角     = hxc_CheckBox.IsChecked    != null && (bool)hxc_CheckBox.IsChecked,
         显示选中项背景圆角 = hxcbj_CheckBox.IsChecked  != null && (bool)hxcbj_CheckBox.IsChecked,
         窗背景底色 = hxcds_CheckBox.IsChecked == true ? "" :
-          RemoveChars(color_Label_5.Background.ToString(), 2),
-        下划线色   = RemoveChars(color_Label_1.Background.ToString(), 2),
-        光标色     = RemoveChars(color_Label_2.Background.ToString(), 2),
-        分隔线色   = RemoveChars(color_Label_3.Background.ToString(), 2),
-        窗口边框色 = RemoveChars(color_Label_4.Background.ToString(), 2),
-        选中背景色 = RemoveChars(color_Label_6.Background.ToString(), 2),
-        选中字体色 = RemoveChars(color_Label_7.Background.ToString(), 2),
-        编码字体色 = RemoveChars(color_Label_8.Background.ToString(), 2),
-        候选字色   = RemoveChars(color_Label_9.Background.ToString(), 2),
+          Base.RemoveChars(color_Label_5.Background.ToString(), 2),
+        下划线色   = Base.RemoveChars(color_Label_1.Background.ToString(), 2),
+        光标色     = Base.RemoveChars(color_Label_2.Background.ToString(), 2),
+        分隔线色   = Base.RemoveChars(color_Label_3.Background.ToString(), 2),
+        窗口边框色 = Base.RemoveChars(color_Label_4.Background.ToString(), 2),
+        选中背景色 = Base.RemoveChars(color_Label_6.Background.ToString(), 2),
+        选中字体色 = Base.RemoveChars(color_Label_7.Background.ToString(), 2),
+        编码字体色 = Base.RemoveChars(color_Label_8.Background.ToString(), 2),
+        候选字色   = Base.RemoveChars(color_Label_9.Background.ToString(), 2),
       };
 
       if (saveButton.Content.ToString() == "保存配色")

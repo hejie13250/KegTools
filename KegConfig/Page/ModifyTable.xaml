@@ -54,10 +54,14 @@
       Grid.Row="1"
       HorizontalAlignment="Left"
       VerticalScrollBarVisibility="Hidden">
-      <StackPanel x:Name="groupBoxStackPanel" Orientation="Vertical">
+      <StackPanel
+        x:Name="groupBoxStackPanel"
+        Width="790"
+        Orientation="Vertical">
 
         <GroupBox
-          Margin="10,0,10,10"
+          Margin="0,0,0,10"
+          HorizontalAlignment="Center"
           Header="码表修改"
           MouseEnter="GroupBox_MouseEnter"
           Style="{DynamicResource HiddenBorderGroupBoxStyle}">
@@ -463,12 +467,21 @@
                     Background="Transparent"
                     BorderBrush="Black"
                     BorderThickness="1,1,1,1"
+                    FontFamily="Arial"
                     Foreground="{DynamicResource TextForeground}"
                     ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
                     MouseDoubleClick="事件_列表_MouseDoubleClick">
                     <ListView.Resources>
                       <Style TargetType="ScrollBar">
                         <Setter Property="Background" Value="Transparent" />
+                      </Style>
+                      <Style TargetType="{x:Type ListView}">
+                        <Setter Property="FontFamily" Value="Arial" />
+                        <Setter Property="FontSize" Value="14" />
+                      </Style>
+                      <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="FontFamily" Value="Arial" />
+                        <Setter Property="FontSize" Value="14" />
                       </Style>
                     </ListView.Resources>
 
@@ -571,6 +584,7 @@
                       Padding="5,0,5,0"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
+                      FontFamily="Arial"
                       Foreground="{DynamicResource TextForeground}"
                       Style="{DynamicResource RoundTextBox}"
                       Tag="编码"
@@ -582,6 +596,7 @@
                       MinWidth="50"
                       Margin="5,0,5,0"
                       Padding="5,0,5,0"
+                      FontFamily="Arial"
                       Foreground="{DynamicResource TextForeground}"
                       Style="{DynamicResource RoundTextBox}"
                       Tag="词条"
@@ -593,6 +608,7 @@
                       MinWidth="50"
                       Padding="5,0,5,0"
                       DataObject.Pasting="事件_权重框_Pasting"
+                      FontFamily="Arial"
                       Foreground="{DynamicResource TextForeground}"
                       PreviewTextInput="事件_权重框_PreviewTextInput"
                       Style="{DynamicResource RoundTextBox}"
@@ -607,6 +623,7 @@
                       Margin="5,0,5,0"
                       Padding="5,0,5,0"
                       VerticalAlignment="Center"
+                      FontFamily="Arial"
                       Foreground="{DynamicResource TextForeground}"
                       Style="{DynamicResource RoundTextBox}"
                       Tag="反查"

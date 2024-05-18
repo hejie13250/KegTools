@@ -159,6 +159,40 @@ namespace KegConfig.Class
     //   SetValue("window", "keg_path", path);
     //   return path;
     // }
+    // 颜色转换 HexToRgb：(255, 255, 255)
+
+
+    public static string HexToRgb(string hex)
+    {
+      // 预期hex字符串格式如 "FF8000" 或 "#FF8000"
+      hex = hex.Replace("#", ""); // 移除可能存在的井号
+      byte r, g, b;
+      if (hex.Length == 6)
+      {
+        r = Convert.ToByte(hex.Substring(0, 2), 16);
+        g = Convert.ToByte(hex.Substring(2, 2), 16);
+        b = Convert.ToByte(hex.Substring(4, 2), 16);
+      }
+      else
+      {
+        r = Convert.ToByte(hex.Substring(2, 2), 16);
+        g = Convert.ToByte(hex.Substring(4, 2), 16);
+        b = Convert.ToByte(hex.Substring(6, 2), 16);
+      }
+      return $"({r}, {g}, {b})";
+    }
+
+    // Hex格式 ARGB 转 RGB，如 #FFAABBCC -> #AABBCC
+    public static string RemoveChars(string str, int n)
+    {
+      str = str.Replace("#", ""); // 移除可能存在的井号
+      return "#" + str.Substring(2, str.Length - n);
+    }
+
+
+
+
+
 
   }
 }

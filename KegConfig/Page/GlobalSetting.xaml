@@ -19,7 +19,7 @@
       <RowDefinition Height="50" />
     </Grid.RowDefinitions>
     <StackPanel
-      Margin="10,0,0,0"
+      Margin="30,0,0,0"
       VerticalAlignment="Top"
       Orientation="Horizontal">
       <Button
@@ -46,8 +46,96 @@
         Style="{DynamicResource RoundButton2}"
         ToolTip="保存全局设置并更新到服务端" />
     </StackPanel>
+    <StackPanel
+      Grid.Row="2"
+      Margin="30,10,0,0"
+      VerticalAlignment="Top"
+      Orientation="Horizontal">
+      <Label Content="添加新选项：" Foreground="{DynamicResource TextForeground}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Click="Add_button_Click"
+        Content="在线查找"
+        Style="{DynamicResource RoundButton2}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="外部工具"
+        Style="{DynamicResource RoundButton2}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="全局快捷命令"
+        Style="{DynamicResource RoundButton2}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="快捷命令"
+        Style="{DynamicResource RoundButton2}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="快捷键"
+        Style="{DynamicResource RoundButton2}" />
+      <ComboBox
+        x:Name="comboBox4"
+        Width="109"
+        Height="24"
+        Margin="5,0,0,0"
+        Foreground="{DynamicResource TextForeground}"
+        SelectedIndex="0"
+        Style="{DynamicResource RoundComboBox}">
+        <ComboBoxItem Content="反查方案快键" />
+        <ComboBoxItem Content="换皮肤快键" />
+        <ComboBoxItem Content="在线查找快键" />
+        <ComboBoxItem Content="方案选择快键" />
+        <ComboBoxItem Content="手动加词条快键" />
+        <ComboBoxItem Content="候选窗口调大快键" />
+        <ComboBoxItem Content="候选窗口调小快键" />
+        <ComboBoxItem Content="上屏反查字段快键" />
+        <ComboBoxItem Content="调整词条置顶快键" />
+        <ComboBoxItem Content="删除方案或词条快键" />
+        <ComboBoxItem Content="进入英文长句态快键" />
+        <ComboBoxItem Content="上屏后再取坐标快键" />
+        <ComboBoxItem Content="截图候选窗口上屏快键" />
+        <ComboBoxItem Content="截图选中候选上屏快键" />
+        <ComboBoxItem Content="截图选中反查上屏快键" />
+        <ComboBoxItem Content="设置截候选图上屏快键" />
+        <ComboBoxItem Content="设置上屏反查字段快键" />
+        <ComboBoxItem Content="打开文字配置界面快键" />
+        <ComboBoxItem Content="显示或隐藏状态条快键" />
+        <ComboBoxItem Content="显示或隐藏反查字段快键" />
+        <ComboBoxItem Content="状态栏回到主屏右下角快键" />
+        <ComboBoxItem Content="获取使用说明重新配置快键" />
+        <ComboBoxItem Content="锁定当前进程为TSF跟随快键" />
+      </ComboBox>
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="自启应用"
+        Style="{DynamicResource RoundButton2}" />
+      <Button
+        Width="auto"
+        Height="24"
+        Margin="5,0,0,0"
+        Click="Add_button_Click"
+        Content="定时关机"
+        Style="{DynamicResource RoundButton2}" />
+    </StackPanel>
     <ScrollViewer
       Grid.Row="1"
+      Width="790"
       HorizontalAlignment="Left"
       VerticalScrollBarVisibility="Hidden">
       <StackPanel x:Name="groupBoxStackPanel" Orientation="Vertical">
@@ -356,6 +444,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -472,6 +561,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -575,6 +665,116 @@
           </Border>
         </GroupBox>
         <GroupBox
+          Header="全局快捷命令"
+          MouseEnter="GroupBox_MouseEnter"
+          Style="{DynamicResource HiddenBorderGroupBoxStyle}">
+          <Border Style="{DynamicResource CustomBorderStyle}">
+            <Grid>
+              <StackPanel Margin="0,0,0,0">
+                <ListView
+                  x:Name="listView9"
+                  Margin="10,10,10,10"
+                  d:ItemsSource="{d:SampleData ItemCount=3}"
+                  BorderBrush="Black"
+                  BorderThickness="1,1,1,1"
+                  ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
+                  PreviewMouseWheel="控件禁止响应滚轮事件"
+                  Style="{DynamicResource ListViewStyle}">
+                  <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                      <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter" />
+                      <EventSetter Event="MouseLeave" Handler="ListViewItem_MouseLeave" />
+                      <Setter Property="Background" Value="Transparent" />
+                      <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                          <Setter Property="Background" Value="{DynamicResource ListItemIsSelectedBackground}" />
+                          <Setter Property="Foreground" Value="{DynamicResource ListItemIsSelectedForeground}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                          <Setter Property="Background" Value="{DynamicResource ListItemIsMouseOverBackground}" />
+                          <Setter Property="Foreground" Value="{DynamicResource ListItemIsMouseOverForeground}" />
+                        </Trigger>
+                      </Style.Triggers>
+                    </Style>
+                  </ListView.ItemContainerStyle>
+                  <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                      <GridViewColumn Width="417" Header="命令">
+                        <GridViewColumn.CellTemplate>
+                          <DataTemplate>
+
+                            <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
+                            <TextBox
+                              x:Name="cmdTextBox"
+                              Width="403"
+                              Height="24"
+                              BorderThickness="0"
+                              Foreground="{DynamicResource TextForeground}"
+                              Style="{DynamicResource RoundTextBox}"
+                              Text="{Binding Cmd}"
+                              TextChanged="TextBox3_TextChanged"
+                              TextWrapping="NoWrap" />
+                          </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                      </GridViewColumn>
+                      <GridViewColumn Width="195" Header="热键">
+                        <GridViewColumn.CellTemplate>
+                          <DataTemplate>
+                            <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
+                            <local:HotKeyControl
+                              x:Name="hotKeyControl"
+                              Width="180"
+                              Height="25"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Center"
+                              FontSize="12"
+                              HotKey="{Binding Value}"
+                              HotKeyPressed="HotKeyControl_HotKeyPressed" />
+                          </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                      </GridViewColumn>
+                      <GridViewColumn Width="45" Header="启用">
+                        <GridViewColumn.CellTemplate>
+                          <DataTemplate>
+                            <!--  ReSharper disable once Xaml.BindingWithContextNotResolved  -->
+                            <CheckBox
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Click="CheckBox_Click"
+                              IsChecked="{Binding Enable}"
+                              Style="{DynamicResource CheckBoxStyle}" />
+                          </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                      </GridViewColumn>
+                      <GridViewColumn Width="40" Header="删除">
+                        <GridViewColumn.CellTemplate>
+                          <DataTemplate>
+                            <Button
+                              x:Name="delButton"
+                              Width="30"
+                              Height="25"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              BorderThickness="0"
+                              Click="DelButton_Click"
+                              Style="{DynamicResource RoundButton}"
+                              Tag="9"
+                              Visibility="Hidden">
+                              <Image Height="14" Source="{DynamicResource 删除}" />
+                            </Button>
+                          </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                      </GridViewColumn>
+
+                    </GridView>
+                  </ListView.View>
+                </ListView>
+              </StackPanel>
+            </Grid>
+          </Border>
+        </GroupBox>
+        <GroupBox
           Header="快捷命令"
           MouseEnter="GroupBox_MouseEnter"
           Style="{DynamicResource HiddenBorderGroupBoxStyle}">
@@ -588,6 +788,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -697,6 +898,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -807,6 +1009,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -898,6 +1101,7 @@
                   BorderBrush="Black"
                   BorderThickness="1,1,1,1"
                   ItemsSource="{Binding UpdateSourceTrigger=PropertyChanged}"
+                  LostFocus="listView_LostFocus"
                   PreviewMouseWheel="控件禁止响应滚轮事件"
                   Style="{DynamicResource ListViewStyle}">
                   <ListView.ItemContainerStyle>
@@ -1098,84 +1302,6 @@
         </GroupBox>
       </StackPanel>
     </ScrollViewer>
-    <StackPanel
-      Grid.Row="2"
-      Margin="10,10,0,0"
-      VerticalAlignment="Top"
-      Orientation="Horizontal">
-      <Button
-        Width="auto"
-        Height="24"
-        Click="Add_button_Click"
-        Content="添加在线查找"
-        Style="{DynamicResource RoundButton2}" />
-      <Button
-        Width="auto"
-        Height="24"
-        Margin="10,0,0,0"
-        Click="Add_button_Click"
-        Content="添加外部工具"
-        Style="{DynamicResource RoundButton2}" />
-      <Button
-        Width="auto"
-        Height="24"
-        Margin="10,0,0,0"
-        Click="Add_button_Click"
-        Content="添加快捷命令"
-        Style="{DynamicResource RoundButton2}" />
-      <Button
-        Width="auto"
-        Height="24"
-        Margin="10,0,0,0"
-        Click="Add_button_Click"
-        Content="添加快捷键"
-        Style="{DynamicResource RoundButton2}" />
-      <ComboBox
-        x:Name="comboBox4"
-        Width="120"
-        Height="24"
-        Margin="5,0,0,0"
-        Foreground="{DynamicResource TextForeground}"
-        SelectedIndex="0"
-        Style="{DynamicResource RoundComboBox}">
-        <ComboBoxItem Content="反查方案快键" />
-        <ComboBoxItem Content="换皮肤快键" />
-        <ComboBoxItem Content="在线查找快键" />
-        <ComboBoxItem Content="方案选择快键" />
-        <ComboBoxItem Content="手动加词条快键" />
-        <ComboBoxItem Content="候选窗口调大快键" />
-        <ComboBoxItem Content="候选窗口调小快键" />
-        <ComboBoxItem Content="上屏反查字段快键" />
-        <ComboBoxItem Content="调整词条置顶快键" />
-        <ComboBoxItem Content="删除方案或词条快键" />
-        <ComboBoxItem Content="进入英文长句态快键" />
-        <ComboBoxItem Content="上屏后再取坐标快键" />
-        <ComboBoxItem Content="截图候选窗口上屏快键" />
-        <ComboBoxItem Content="截图选中候选上屏快键" />
-        <ComboBoxItem Content="截图选中反查上屏快键" />
-        <ComboBoxItem Content="设置截候选图上屏快键" />
-        <ComboBoxItem Content="设置上屏反查字段快键" />
-        <ComboBoxItem Content="打开文字配置界面快键" />
-        <ComboBoxItem Content="显示或隐藏状态条快键" />
-        <ComboBoxItem Content="显示或隐藏反查字段快键" />
-        <ComboBoxItem Content="状态栏回到主屏右下角快键" />
-        <ComboBoxItem Content="获取使用说明重新配置快键" />
-        <ComboBoxItem Content="锁定当前进程为TSF跟随快键" />
-      </ComboBox>
-      <Button
-        Width="auto"
-        Height="24"
-        Margin="10,0,0,0"
-        Click="Add_button_Click"
-        Content="添加自启应用"
-        Style="{DynamicResource RoundButton2}" />
-      <Button
-        Width="auto"
-        Height="24"
-        Margin="10,0,0,0"
-        Click="Add_button_Click"
-        Content="添加定时关机"
-        Style="{DynamicResource RoundButton2}" />
-    </StackPanel>
+
   </Grid>
 </class:BasePage>
