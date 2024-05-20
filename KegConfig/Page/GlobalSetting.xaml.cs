@@ -30,6 +30,7 @@ using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using Path = System.IO.Path;
 using RadioButton = System.Windows.Controls.RadioButton;
 using TextBox = System.Windows.Controls.TextBox;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace KegConfig.Page
 {
@@ -158,11 +159,11 @@ namespace KegConfig.Page
     {
       InitializeComponent();
 
+      if (!Directory.Exists($"{_appPath}\\configs"))
+        Directory.CreateDirectory($"{_appPath}\\configs");
 
       _globalSettingFilePath = $"{_appPath}\\configs\\全局设置.json";
       _kegBakPath = $"{_appPath}\\configs\\Keg_bak.txt";
-
-      if (!Directory.Exists($"{_appPath}\\configs")) Directory.CreateDirectory($"{_appPath}\\configs");
 
       // 获取小科狗主程序目录
       _kegPath = Base.KegPath;
@@ -201,7 +202,54 @@ namespace KegConfig.Page
       DataContext = this;
       LoadKegSkinImages();  // 读取 读取状态条皮肤图片
       ReadKegText();        // 读取 全局设置
+      LoadHxFile();
     }
+
+
+
+    // 读取内置快键清单
+    private void LoadHxFile()
+    {
+      var file = $"{_appPath}\\configs\\内置快键.txt";
+      string numStr = @"反查方案快键
+换皮肤快键
+在线查找快键
+方案选择快键
+自动造词快键
+手动加词条快键
+候选窗口调大快键
+候选窗口调小快键
+上屏反查字段快键
+调整词条置顶快键
+删除方案或词条快键
+进入英文长句态快键
+上屏后再取坐标快键
+截图候选窗口上屏快键
+截图选中候选上屏快键
+截图选中反查上屏快键
+设置截候选图上屏快键
+设置上屏反查字段快键
+打开文字配置界面快键
+显示或隐藏状态条快键
+显示或隐藏反查字段快键
+状态栏回到主屏右下角快键
+获取使用说明重新配置快键
+锁定当前进程为TSF跟随快键";
+      if (!File.Exists(file))
+        File.WriteAllText(file, numStr);
+      using StreamReader sr = new(file);
+      while (sr.ReadLine() is { } line)
+      {
+        ComboBoxItem item = new() { Content = line };
+        comboBox4.Items.Add(item);
+      }
+     comboBox4.SelectedIndex = 0;
+    }
+
+
+
+
+
 
     // 显示颜色的 label 鼠标进入事件
     private void Color_label_MouseEnter(object sender, MouseEventArgs e)
@@ -698,26 +746,26 @@ namespace KegConfig.Page
       _全局设置 = new()
       {
         状态栏和其它设置 = new(),
-        查找列表 = new ObservableCollection<列表项>(),
-        外部工具 = new ObservableCollection<列表项>(),
-        快键命令 = new ObservableCollection<列表项>(),
+        查找列表     = new ObservableCollection<列表项>(),
+        外部工具     = new ObservableCollection<列表项>(),
+        快键命令     = new ObservableCollection<列表项>(),
         全局快键命令 = new ObservableCollection<列表项>(),
-        快键 = new ObservableCollection<列表项>(),
-        自启 = new ObservableCollection<列表项>(),
-        自动关机 = new ObservableCollection<列表项>()
+        快键         = new ObservableCollection<列表项>(),
+        自启         = new ObservableCollection<列表项>(),
+        自动关机     = new ObservableCollection<列表项>()
       };
 
       // 读取整个文件内容,将JSON字符串反序列化为对象
       var jsonString = File.ReadAllText(_globalSettingFilePath);
       _全局设置 = JsonConvert.DeserializeObject<GlobalSettings>(jsonString);
-      列表_查找列表 = _全局设置.查找列表;
-      列表_外部工具 = _全局设置.外部工具;
-      列表_快键命令 = _全局设置.快键命令;
+      列表_查找列表     = _全局设置.查找列表;
+      列表_外部工具     = _全局设置.外部工具;
+      列表_快键命令     = _全局设置.快键命令;
       列表_全局快键命令 = _全局设置.全局快键命令;
-      列表_快键 = _全局设置.快键;
-      列表_自启 = _全局设置.自启;
-      列表_自动关机 = _全局设置.自动关机;
-      状态条_设置项 = _全局设置.状态栏和其它设置;
+      列表_快键         = _全局设置.快键;
+      列表_自启         = _全局设置.自启;
+      列表_自动关机     = _全局设置.自动关机;
+      状态条_设置项     = _全局设置.状态栏和其它设置;
 
       if (状态条_设置项 != null)
       {
@@ -736,13 +784,13 @@ namespace KegConfig.Page
         color_Label_2.Background  = new SolidColorBrush((Color)ColorConverter.ConvertFromString(状态条_设置项.提示文本英文字体色)!);
       }
 
-      listView3.ItemsSource = 列表_查找列表; // ListView的数据
-      listView8.ItemsSource = 列表_外部工具;
-      listView4.ItemsSource = 列表_快键命令;
-      listView9.ItemsSource = 列表_全局快键命令;
-      listView5.ItemsSource = 列表_快键;
-      listView6.ItemsSource = 列表_自启;
-      listView7.ItemsSource = 列表_自动关机;
+      listView3.ItemsSource = 列表_查找列表     != null ? 列表_查找列表     : new ObservableCollection<列表项>();
+      listView8.ItemsSource = 列表_外部工具     != null ? 列表_外部工具     : new ObservableCollection<列表项>();
+      listView4.ItemsSource = 列表_快键命令     != null ? 列表_快键命令     : new ObservableCollection<列表项>();
+      listView9.ItemsSource = 列表_全局快键命令 != null ? 列表_全局快键命令 : new ObservableCollection<列表项>();
+      listView5.ItemsSource = 列表_快键         != null ? 列表_快键         : new ObservableCollection<列表项>();
+      listView6.ItemsSource = 列表_自启         != null ? 列表_自启         : new ObservableCollection<列表项>();
+      listView7.ItemsSource = 列表_自动关机     != null ? 列表_自动关机     : new ObservableCollection<列表项>();
     }
 
 
@@ -1087,9 +1135,6 @@ namespace KegConfig.Page
         _    => toolTipTextBlock.VerticalAlignment
       };
     }
-
-
-
 
 
 

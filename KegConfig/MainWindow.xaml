@@ -27,624 +27,566 @@
     <WindowChrome GlassFrameThickness="-1" />
   </WindowChrome.WindowChrome>
   <Grid>
-    <!--<Ellipse
-      Grid.ColumnSpan="3"
-      Width="1"
-      Height="1"
-      Margin="30"
-      HorizontalAlignment="Left"
-      VerticalAlignment="Bottom"
-      Fill="#552d4059"
-      RenderTransformOrigin="0.5,0.5">
-      <Ellipse.RenderTransform>
-        <TransformGroup>
-          <ScaleTransform x:Name="backEllipseScale" />
-        </TransformGroup>
-      </Ellipse.RenderTransform>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid Grid.Row="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="auto" />
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Row="0">
+        <TextBlock
+          x:Name="title"
+          Margin="15,15,0,20"
+          Foreground="{DynamicResource TextForeground2}"
+          Text="小科狗配置工具" />
+      </StackPanel>
+      <StackPanel
+        Grid.Column="1"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Orientation="Horizontal">
+        <Button
+          Width="45"
+          Height="30"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="Button_Click_1"
+          Content="─"
+          Foreground="{DynamicResource TextForeground}" />
+        <Button
+          Width="45"
+          Height="30"
+          Background="Transparent"
+          BorderThickness="0"
+          Click="Button_Click"
+          Content="✕"
+          Foreground="{DynamicResource TextForeground}" />
+      </StackPanel>
+    </Grid>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="160" />
+        <ColumnDefinition Width="790" />
+      </Grid.ColumnDefinitions>
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*" />
+          <RowDefinition Height="32" />
+        </Grid.RowDefinitions>
 
-      <Ellipse.Style>
-        <Style TargetType="Ellipse">
-          <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=themeToggle, Path=IsChecked}" Value="True">
-              <Setter Property="Visibility" Value="Visible" />
-              <DataTrigger.EnterActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation
-                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
-                      To="3500"
-                      Duration="0:0:2">
-                      <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                      </DoubleAnimation.EasingFunction>
-                    </DoubleAnimation>
-                    <DoubleAnimation
-                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
-                      To="3500"
-                      Duration="0:0:2">
-                      <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                      </DoubleAnimation.EasingFunction>
-                    </DoubleAnimation>
-                  </Storyboard>
-                </BeginStoryboard>
-              </DataTrigger.EnterActions>
-              <DataTrigger.ExitActions>
-                <BeginStoryboard>
-                  <Storyboard>
-                    <DoubleAnimation
-                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
-                      To="0"
-                      Duration="0:0:1">
-                      <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                      </DoubleAnimation.EasingFunction>
-                    </DoubleAnimation>
-                    <DoubleAnimation
-                      Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
-                      To="0"
-                      Duration="0:0:1">
-                      <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                      </DoubleAnimation.EasingFunction>
-                    </DoubleAnimation>
-                  </Storyboard>
-                </BeginStoryboard>
-              </DataTrigger.ExitActions>
-            </DataTrigger>
-          </Style.Triggers>
-        </Style>
-      </Ellipse.Style>
-    </Ellipse>-->
-    <Grid>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="50" />
-        <RowDefinition Height="*" />
-      </Grid.RowDefinitions>
-      <Grid Grid.Row="0">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0">
-          <TextBlock
-            x:Name="title"
-            Margin="15,15,0,20"
-            Foreground="{DynamicResource TextForeground2}"
-            Text="小科狗配置工具" />
-        </StackPanel>
-        <StackPanel
-          Grid.Column="1"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Bottom"
-          Orientation="Horizontal">
-          <Button
-            Width="45"
-            Height="30"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="Button_Click_1"
-            Content="─"
-            Foreground="{DynamicResource TextForeground}" />
-          <Button
-            Width="45"
-            Height="30"
-            Background="Transparent"
-            BorderThickness="0"
-            Click="Button_Click"
-            Content="✕"
-            Foreground="{DynamicResource TextForeground}" />
-        </StackPanel>
-      </Grid>
-      <Grid Grid.Row="1">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="160" />
-          <ColumnDefinition Width="790" />
-        </Grid.ColumnDefinitions>
-        <Grid>
-          <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="32" />
-          </Grid.RowDefinitions>
-
-          <StackPanel Margin="5,0,0,10">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-              <StackPanel>
+        <StackPanel Margin="5,0,0,10">
+          <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+              <RadioButton
+                Click="LeftRadioButton1_Click"
+                IsChecked="True"
+                Style="{DynamicResource RadioButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="{DynamicResource TextForeground2}"
+                    Text="方案设置" />
+                </StackPanel>
+              </RadioButton>
+              <StackPanel x:Name="leftStackPanel1" Orientation="Vertical">
                 <RadioButton
-                  Click="LeftRadioButton1_Click"
-                  IsChecked="True"
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
                   Style="{DynamicResource RadioButtonStyle}">
                   <StackPanel Orientation="Horizontal">
                     <TextBlock
                       Margin="10,0,0,0"
                       VerticalAlignment="Center"
-                      FontSize="18"
                       Foreground="{DynamicResource TextForeground2}"
-                      Text="方案设置" />
+                      Text="候选框配色" />
                   </StackPanel>
                 </RadioButton>
-                <StackPanel x:Name="leftStackPanel1" Orientation="Vertical">
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="候选框配色" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="候选框样式" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="字体和渲染" />
-                    </StackPanel>
-                  </RadioButton>
-
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="码元设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="标点设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="动作设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="顶功设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="上屏设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="中英切换" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="翻页按键" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="词语联想" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="码表调频与检索" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="重复上屏" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="自动造词" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="反查方案设置" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="临时码表检索" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="引导码表检索" />
-                    </StackPanel>
-                  </RadioButton>
-                </StackPanel>
-
-
-
-                <Border
-                  Margin="10"
-                  BorderBrush="#8F8F8F"
-                  BorderThickness="0,1,0,0" />
-
-                <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
                   <StackPanel Orientation="Horizontal">
                     <TextBlock
                       Margin="10,0,0,0"
                       VerticalAlignment="Center"
-                      FontSize="18"
                       Foreground="{DynamicResource TextForeground2}"
-                      Text="全局设置" />
+                      Text="候选框样式" />
                   </StackPanel>
                 </RadioButton>
-
-
-                <StackPanel x:Name="leftStackPanel2" Orientation="Vertical">
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="状态条" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="在线查找" />
-                    </StackPanel>
-                  </RadioButton>
-
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="外部工具" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="全局快捷命令" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="快捷命令" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="快捷键" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="自启动应用" />
-                    </StackPanel>
-                  </RadioButton>
-
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="定时关机" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="其它选项" />
-                    </StackPanel>
-                  </RadioButton>
-                </StackPanel>
-                <Border
-                  Margin="10"
-                  BorderBrush="#8F8F8F"
-                  BorderThickness="0,1,0,0" />
-
-                <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
                   <StackPanel Orientation="Horizontal">
                     <TextBlock
                       Margin="10,0,0,0"
                       VerticalAlignment="Center"
-                      FontSize="18"
                       Foreground="{DynamicResource TextForeground2}"
-                      Text="打字统计" />
+                      Text="字体和渲染" />
                   </StackPanel>
                 </RadioButton>
 
-                <StackPanel x:Name="leftStackPanel4" Orientation="Vertical">
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="曲线图" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="今日和累计数据" />
-                    </StackPanel>
-                  </RadioButton>
-                </StackPanel>
-
-                <Border
-                  Margin="10"
-                  BorderBrush="#8F8F8F"
-                  BorderThickness="0,1,0,0" />
-
-                <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
                   <StackPanel Orientation="Horizontal">
                     <TextBlock
                       Margin="10,0,0,0"
                       VerticalAlignment="Center"
-                      FontSize="18"
                       Foreground="{DynamicResource TextForeground2}"
-                      Text="码表设置" />
+                      Text="码元设置" />
                   </StackPanel>
                 </RadioButton>
-
-                <StackPanel x:Name="leftStackPanel5" Orientation="Vertical">
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="码表修改" />
-                    </StackPanel>
-                  </RadioButton>
-                </StackPanel>
-                <Border
-                  Margin="10"
-                  BorderBrush="#8F8F8F"
-                  BorderThickness="0,1,0,0" />
-                <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
                   <StackPanel Orientation="Horizontal">
                     <TextBlock
                       Margin="10,0,0,0"
                       VerticalAlignment="Center"
-                      FontSize="18"
                       Foreground="{DynamicResource TextForeground2}"
-                      Text="帮助" />
+                      Text="标点设置" />
                   </StackPanel>
                 </RadioButton>
-                <StackPanel x:Name="leftStackPanel3" Orientation="Vertical">
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="关于" />
-                    </StackPanel>
-                  </RadioButton>
-                  <RadioButton
-                    Margin="10,0,0,0"
-                    Click="LeftRadioButton2_Click"
-                    Style="{DynamicResource RadioButtonStyle}">
-                    <StackPanel Orientation="Horizontal">
-                      <TextBlock
-                        Margin="10,0,0,0"
-                        VerticalAlignment="Center"
-                        Foreground="{DynamicResource TextForeground2}"
-                        Text="全局设置说明" />
-                    </StackPanel>
-                  </RadioButton>
-                </StackPanel>
-
-
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="动作设置" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="顶功设置" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="上屏设置" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="中英切换" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="翻页按键" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="词语联想" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="码表调频与检索" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="重复上屏" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="自动造词" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="反查方案设置" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="临时码表检索" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="引导码表检索" />
+                  </StackPanel>
+                </RadioButton>
               </StackPanel>
-            </ScrollViewer>
-          </StackPanel>
+
+
+
+              <Border
+                Margin="10"
+                BorderBrush="#8F8F8F"
+                BorderThickness="0,1,0,0" />
+
+              <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="{DynamicResource TextForeground2}"
+                    Text="全局设置" />
+                </StackPanel>
+              </RadioButton>
+
+
+              <StackPanel x:Name="leftStackPanel2" Orientation="Vertical">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="状态条" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="在线查找" />
+                  </StackPanel>
+                </RadioButton>
+
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="外部工具" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="全局快捷命令" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="快捷命令" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="快捷键" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="自启动应用" />
+                  </StackPanel>
+                </RadioButton>
+
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="定时关机" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="其它选项" />
+                  </StackPanel>
+                </RadioButton>
+              </StackPanel>
+              <Border
+                Margin="10"
+                BorderBrush="#8F8F8F"
+                BorderThickness="0,1,0,0" />
+
+              <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="{DynamicResource TextForeground2}"
+                    Text="打字统计" />
+                </StackPanel>
+              </RadioButton>
+
+              <StackPanel x:Name="leftStackPanel4" Orientation="Vertical">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="曲线图" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="今日和累计数据" />
+                  </StackPanel>
+                </RadioButton>
+              </StackPanel>
+
+              <Border
+                Margin="10"
+                BorderBrush="#8F8F8F"
+                BorderThickness="0,1,0,0" />
+
+              <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="{DynamicResource TextForeground2}"
+                    Text="码表设置" />
+                </StackPanel>
+              </RadioButton>
+
+              <StackPanel x:Name="leftStackPanel5" Orientation="Vertical">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="码表修改" />
+                  </StackPanel>
+                </RadioButton>
+              </StackPanel>
+              <Border
+                Margin="10"
+                BorderBrush="#8F8F8F"
+                BorderThickness="0,1,0,0" />
+              <RadioButton Click="LeftRadioButton1_Click" Style="{DynamicResource RadioButtonStyle}">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    Foreground="{DynamicResource TextForeground2}"
+                    Text="帮助" />
+                </StackPanel>
+              </RadioButton>
+              <StackPanel x:Name="leftStackPanel3" Orientation="Vertical">
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="窗口设置" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="关于" />
+                  </StackPanel>
+                </RadioButton>
+                <RadioButton
+                  Margin="10,0,0,0"
+                  Click="LeftRadioButton2_Click"
+                  Style="{DynamicResource RadioButtonStyle}">
+                  <StackPanel Orientation="Horizontal">
+                    <TextBlock
+                      Margin="10,0,0,0"
+                      VerticalAlignment="Center"
+                      Foreground="{DynamicResource TextForeground2}"
+                      Text="全局设置说明" />
+                  </StackPanel>
+                </RadioButton>
+              </StackPanel>
+
+
+            </StackPanel>
+          </ScrollViewer>
+        </StackPanel>
 
 
 
 
-          <StackPanel
-            Grid.Row="1"
-            VerticalAlignment="Bottom"
-            Background="#00000000"
-            Orientation="Horizontal">
+        <StackPanel
+          Grid.Row="1"
+          VerticalAlignment="Bottom"
+          Background="#00000000"
+          Orientation="Horizontal">
 
-            <ToggleButton
-              x:Name="SettingToggle"
-              HorizontalAlignment="Left"
-              Checked="SettingToggle_Checked"
-              IsChecked="False"
-              Unchecked="SettingToggle_Unchecked">
-              <Image
-                Width="28"
-                Height="28"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Source="{DynamicResource settingDrawingImage}" />
-            </ToggleButton>
+          <!--<ToggleButton
+            x:Name="SettingToggle"
+            HorizontalAlignment="Left"
+            Checked="SettingToggle_Checked"
+            IsChecked="False"
+            Unchecked="SettingToggle_Unchecked">
+            <Image
+              Width="28"
+              Height="28"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Source="{DynamicResource settingDrawingImage}" />
+          </ToggleButton>-->
 
-            <!--<ToggleButton
+          <!--<ToggleButton
               x:Name="themeToggle"
               HorizontalAlignment="Left"
               Checked="ThemeToggle_Checked"
@@ -700,501 +642,52 @@
               </Popup>
             </Grid>-->
 
-          </StackPanel>
-
-        </Grid>
-        <StackPanel
-          Grid.Column="1"
-          HorizontalAlignment="Center"
-          Orientation="Horizontal">
-          <StackPanel x:Name="frameStackPanel" Orientation="Horizontal">
-            <Frame
-              x:Name="frame1"
-              VerticalAlignment="Top"
-              NavigationUIVisibility="Hidden"
-              Source="Page/SchemeSetting.xaml" />
-            <Frame
-              x:Name="frame2"
-              VerticalAlignment="Top"
-              NavigationUIVisibility="Hidden"
-              Source="Page/GlobalSetting.xaml" />
-            <Frame
-              x:Name="frame3"
-              VerticalAlignment="Top"
-              NavigationUIVisibility="Hidden"
-              Source="Page/Abort.xaml" />
-            <Frame
-              x:Name="frame4"
-              VerticalAlignment="Top"
-              NavigationUIVisibility="Hidden"
-              Source="Page/KegStatistics.xaml" />
-            <Frame
-              x:Name="frame5"
-              VerticalAlignment="Top"
-              NavigationUIVisibility="Hidden"
-              Source="Page/ModifyTable.xaml" />
-          </StackPanel>
-          <ScrollViewer
-            Grid.Row="1"
-            HorizontalAlignment="Left"
-            VerticalScrollBarVisibility="Hidden">
-            <StackPanel
-              x:Name="settingStackPanel"
-              Width="790"
-              HorizontalAlignment="Center"
-              Orientation="Horizontal">
-              <GroupBox
-                Margin="30,0,30,10"
-                HorizontalAlignment="Center"
-                Header="窗口设置"
-                Style="{DynamicResource HiddenBorderGroupBoxStyle}">
-
-                <Border Style="{DynamicResource CustomBorderStyle}">
-                  <Grid>
-                    <StackPanel Orientation="Horizontal">
-                      <Grid Margin="10,10,10,10" HorizontalAlignment="Left">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="140" />
-                          <ColumnDefinition Width="185" />
-                          <ColumnDefinition Width="185" />
-                          <ColumnDefinition Width="185" />
-                        </Grid.ColumnDefinitions>
-                        <Label
-                          x:Name="ddLabel"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="背景图预览："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="3"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="显示背景图："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="4"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框圆角半径："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="5"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框阴影半径："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="6"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框阴影深度："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="7"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框阴影颜色："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="8"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框背景颜色："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="9"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="窗口背景颜色："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="10"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="窗口前景颜色："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="11"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="分组框前景颜色："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <Label
-                          Grid.Row="12"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Content="文字字体："
-                          Foreground="{DynamicResource TextForeground}" />
-                        <StackPanel
-                          Grid.RowSpan="3"
-                          Grid.Column="1"
-                          Width="185"
-                          Height="126"
-                          Orientation="Horizontal">
-                          <Image
-                            x:Name="displayImage"
-                            Width="175"
-                            Height="125"
-                            Margin="3,3,3,3" />
-                        </StackPanel>
-                        <CheckBox
-                          x:Name="BackgroundCheckBox"
-                          x:Uid="String1"
-                          Grid.Row="3"
-                          Grid.Column="1"
-                          Width="32"
-                          Height="21"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Checked="BackgroundCheckBox_Checked"
-                          IsEnabled="False"
-                          MouseEnter="Contorl_MouseEnter"
-                          MouseLeave="Contorl_MouseLeave"
-                          Style="{DynamicResource CheckBoxStyle}"
-                          Unchecked="BackgroundCheckBox_Unchecked" />
-
-                        <local:NumericUpDown
-                          x:Name="nud1"
-                          Grid.Row="4"
-                          Grid.Column="1"
-                          Width="50"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          IsEnabled="{Binding IsChecked, ElementName=hxc_CheckBox}"
-                          MaxValue="30"
-                          MinValue="1"
-                          MouseEnter="Contorl_MouseEnter"
-                          MouseLeave="Contorl_MouseLeave"
-                          ValueChanged="nud1_ValueChanged"
-                          Value="20" />
-
-                        <local:NumericUpDown
-                          x:Name="nud2"
-                          Grid.Row="5"
-                          Grid.Column="1"
-                          Width="50"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          IsEnabled="{Binding IsChecked, ElementName=hxcbj_CheckBox}"
-                          MaxValue="20"
-                          MinValue="0"
-                          MouseEnter="Contorl_MouseEnter"
-                          MouseLeave="Contorl_MouseLeave"
-                          ValueChanged="nud2_ValueChanged"
-                          Value="10" />
-
-                        <local:NumericUpDown
-                          x:Name="nud3"
-                          Grid.Row="6"
-                          Grid.Column="1"
-                          Width="50"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          MaxValue="20"
-                          MinValue="0"
-                          MouseEnter="Contorl_MouseEnter"
-                          MouseLeave="Contorl_MouseLeave"
-                          ValueChanged="nud3_ValueChanged"
-                          Value="2" />
-
-                        <StackPanel
-                          Grid.Row="7"
-                          Grid.Column="1"
-                          Orientation="Horizontal">
-                          <Label
-                            x:Name="color_Label_1"
-                            Width="50"
-                            Height="22"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="Gray"
-                            BorderBrush="Black"
-                            BorderThickness="1,1,1,1"
-                            MouseEnter="Color_label_MouseEnter"
-                            MouseLeave="Color_label_MouseLeave"
-                            Style="{DynamicResource RoundedLabel}" />
-                          <Label
-                            x:Name="color_Label_001"
-                            Width="10"
-                            Height="10"
-                            Margin="1,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFFF0000"
-                            Style="{DynamicResource RoundedLabel}"
-                            Visibility="Hidden" />
-
-                        </StackPanel>
-
-                        <StackPanel
-                          Grid.Row="8"
-                          Grid.Column="1"
-                          Orientation="Horizontal">
-                          <Label
-                            x:Name="color_Label_2"
-                            Width="50"
-                            Height="22"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#33FFFFFF"
-                            BorderBrush="Black"
-                            BorderThickness="1,1,1,1"
-                            MouseEnter="Color_label_MouseEnter"
-                            MouseLeave="Color_label_MouseLeave"
-                            Style="{DynamicResource RoundedLabel}" />
-                          <Label
-                            x:Name="color_Label_002"
-                            Width="10"
-                            Height="10"
-                            Margin="1,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFFF0000"
-                            Style="{DynamicResource RoundedLabel}"
-                            Visibility="Hidden" />
-
-                        </StackPanel>
-                        <StackPanel
-                          Grid.Row="9"
-                          Grid.Column="1"
-                          Orientation="Horizontal">
-                          <Label
-                            x:Name="color_Label_3"
-                            Width="50"
-                            Height="22"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#33FFFFFF"
-                            BorderBrush="Black"
-                            BorderThickness="1,1,1,1"
-                            MouseEnter="Color_label_MouseEnter"
-                            MouseLeave="Color_label_MouseLeave"
-                            Style="{DynamicResource RoundedLabel}" />
-                          <Label
-                            x:Name="color_Label_003"
-                            Width="10"
-                            Height="10"
-                            Margin="1,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFFF0000"
-                            Style="{DynamicResource RoundedLabel}"
-                            Visibility="Hidden" />
-
-                        </StackPanel>
-                        <StackPanel
-                          Grid.Row="10"
-                          Grid.Column="1"
-                          Orientation="Horizontal">
-                          <Label
-                            x:Name="color_Label_4"
-                            Width="50"
-                            Height="22"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="Black"
-                            BorderBrush="Black"
-                            BorderThickness="1,1,1,1"
-                            MouseEnter="Color_label_MouseEnter"
-                            MouseLeave="Color_label_MouseLeave"
-                            Style="{DynamicResource RoundedLabel}" />
-                          <Label
-                            x:Name="color_Label_004"
-                            Width="10"
-                            Height="10"
-                            Margin="1,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFFF0000"
-                            Style="{DynamicResource RoundedLabel}"
-                            Visibility="Hidden" />
-                        </StackPanel>
-                        <StackPanel
-                          Grid.Row="11"
-                          Grid.Column="1"
-                          Orientation="Horizontal">
-                          <Label
-                            x:Name="color_Label_5"
-                            Width="50"
-                            Height="22"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="Black"
-                            BorderBrush="Black"
-                            BorderThickness="1,1,1,1"
-                            MouseEnter="Color_label_MouseEnter"
-                            MouseLeave="Color_label_MouseLeave"
-                            Style="{DynamicResource RoundedLabel}" />
-                          <Label
-                            x:Name="color_Label_005"
-                            Width="10"
-                            Height="10"
-                            Margin="1,0,0,0"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Center"
-                            Background="#FFFF0000"
-                            Style="{DynamicResource RoundedLabel}"
-                            Visibility="Hidden" />
-                        </StackPanel>
-                        <ComboBox
-                          x:Name="fontComboBox"
-                          Grid.Row="12"
-                          Grid.Column="1"
-                          Width="170"
-                          Height="auto"
-                          HorizontalAlignment="Left"
-                          DisplayMemberPath="."
-                          Foreground="{DynamicResource TextForeground}"
-                          ItemsSource="{Binding FontFamilies}"
-                          MouseEnter="Contorl_MouseEnter"
-                          MouseLeave="Contorl_MouseLeave"
-                          SelectedItem="{Binding SelectedFontFamily}"
-                          SelectionChanged="fontComboBox_SelectionChanged"
-                          Style="{DynamicResource RoundComboBox}" />
-                        <StackPanel
-                          Grid.RowSpan="10"
-                          Grid.Column="2"
-                          Width="175"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          Orientation="Vertical">
-                          <ListBox
-                            x:Name="skinListBox"
-                            Height="137"
-                            Margin="0,0,2,5"
-                            VerticalAlignment="Top"
-                            d:ItemsSource="{d:SampleData ItemCount=5}"
-                            Foreground="{DynamicResource TextForeground}"
-                            SelectionChanged="skinListBox_SelectionChanged"
-                            Style="{DynamicResource RoundedListBox}" />
-                          <Button
-                            x:Name="applyButton"
-                            Height="24"
-                            Margin="0,0,2,10"
-                            VerticalAlignment="Top"
-                            Click="Apply_button_Click"
-                            Content="应用设置"
-                            Style="{DynamicResource RoundButton2}" />
-                        </StackPanel>
-
-
-                        <StackPanel
-                          Grid.RowSpan="16"
-                          Grid.Column="3"
-                          VerticalAlignment="Top"
-                          Orientation="Vertical">
-                          <ListBox
-                            x:Name="colorSchemeListBox"
-                            Height="137"
-                            Margin="0,0,2,5"
-                            Padding="3"
-                            d:ItemsSource="{d:SampleData ItemCount=5}"
-                            Foreground="{DynamicResource TextForeground}"
-                            MouseDoubleClick="ColorSchemeListBox_MouseDoubleClick"
-                            SelectionChanged="ColorSchemeListBox_SelectionChanged"
-                            Style="{DynamicResource RoundedListBox}">
-                            <ListBox.ContextMenu>
-                              <ContextMenu>
-                                <MenuItem Click="MenuItem_Click_1" Header="新建" />
-                                <MenuItem Click="MenuItem_Click_2" Header="修改" />
-                                <MenuItem Click="MenuItem_Click_3" Header="删除" />
-                              </ContextMenu>
-                            </ListBox.ContextMenu>
-                          </ListBox>
-                          <StackPanel Margin="0,0,0,10" Orientation="Horizontal">
-                            <TextBox
-                              x:Name="color_Scheme_Name_TextBox"
-                              Width="104"
-                              Height="24"
-                              Margin="0,0,5,0"
-                              VerticalAlignment="Top"
-                              Foreground="{DynamicResource TextForeground}"
-                              Style="{DynamicResource RoundTextBox}"
-                              Text=""
-                              TextWrapping="NoWrap" />
-                            <Button
-                              x:Name="saveButton"
-                              Width="auto"
-                              Height="24"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Top"
-                              Click="SaveButton_Click"
-                              Content="保存配色"
-                              Style="{DynamicResource RoundButton2}" />
-
-                          </StackPanel>
-                          <contorl:ColorPicker
-                            x:Name="colorPicker"
-                            Height="155"
-                            HorizontalAlignment="Left" />
-                          <StackPanel Margin="0,4,0,0" Orientation="Vertical">
-                            <StackPanel
-                              Width="155"
-                              Height="20"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Center"
-                              Background="Black"
-                              Orientation="Vertical">
-                              <Slider
-                                x:Name="slider"
-                                Width="155"
-                                Height="20"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                IsSnapToTickEnabled="True"
-                                LargeChange="1"
-                                Maximum="255"
-                                Minimum="0"
-                                MouseEnter="Contorl_MouseEnter"
-                                MouseUp="Alpha_Slider_MouseUp"
-                                MouseWheel="Alpha_Slider_MouseWheel"
-                                Style="{StaticResource ColorAlphaSliderStyle}"
-                                ValueChanged="Slider_ValueChanged" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                              <Label
-                                Height="auto"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                Content="自定义："
-                                Foreground="{DynamicResource TextForeground}" />
-                              <local:RGBTextBox
-                                x:Name="rgbTextBox"
-                                Height="24"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center" />
-
-                            </StackPanel>
-                          </StackPanel>
-                        </StackPanel>
-                      </Grid>
-                    </StackPanel>
-                  </Grid>
-                </Border>
-              </GroupBox>
-            </StackPanel>
-          </ScrollViewer>
         </StackPanel>
 
       </Grid>
+      <StackPanel
+        Grid.Column="1"
+        HorizontalAlignment="Center"
+        Orientation="Horizontal">
+        <StackPanel x:Name="frameStackPanel" Orientation="Horizontal">
+          <Frame
+            x:Name="frame1"
+            VerticalAlignment="Top"
+            NavigationUIVisibility="Hidden"
+            Source="Page/SchemeSetting.xaml" />
+          <Frame
+            x:Name="frame2"
+            VerticalAlignment="Top"
+            NavigationUIVisibility="Hidden"
+            Source="Page/GlobalSetting.xaml" />
+          <Frame
+            x:Name="frame3"
+            VerticalAlignment="Top"
+            NavigationUIVisibility="Hidden"
+            Source="Page/Abort.xaml" />
+          <Frame
+            x:Name="frame4"
+            VerticalAlignment="Top"
+            NavigationUIVisibility="Hidden"
+            Source="Page/KegStatistics.xaml" />
+          <Frame
+            x:Name="frame5"
+            VerticalAlignment="Top"
+            NavigationUIVisibility="Hidden"
+            Source="Page/ModifyTable.xaml" />
+        </StackPanel>
+        <!--<ScrollViewer
+          Grid.Row="1"
+          HorizontalAlignment="Left"
+          VerticalScrollBarVisibility="Hidden">
+          <StackPanel
+            x:Name="settingStackPanel"
+            Width="790"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal" />
+        </ScrollViewer>-->
+      </StackPanel>
+
     </Grid>
   </Grid>
 </Window>

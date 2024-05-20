@@ -68,6 +68,8 @@ namespace KegConfig.Page
       sdCheckBox.Click += CheckBox_Click;
       mcCheckBox.Click += CheckBox_Click;
       rQcheckBox.Click += CheckBox_Click2;
+      xCheckBox.Click  += CheckBox_Click3;
+      yCheckBox.Click  += CheckBox_Click3;
       comboBox.SelectionChanged += ComboBox_SelectionChanged;
 
       DataContext = new ViewModel();
@@ -88,6 +90,8 @@ namespace KegConfig.Page
       sdCheckBox.IsChecked = Base.GetValue("dzsjtj", "sd") == "1";
       mcCheckBox.IsChecked = Base.GetValue("dzsjtj", "mc") == "1";
       rQcheckBox.IsChecked = Base.GetValue("dzsjtj", "rq") == "1";
+      xCheckBox.IsChecked  = Base.GetValue("dzsjtj", "x")  == "1";
+      yCheckBox.IsChecked  = Base.GetValue("dzsjtj", "y")  == "1";
       var isNumberValid = double.TryParse(Base.GetValue("dzsjtj", "xs"), out var xs);
       nud.Value = isNumberValid ? xs : 4.5;
 
@@ -288,7 +292,7 @@ namespace KegConfig.Page
             LabelsRotation = -30,
             // 颜色和线粗
             //SeparatorsPaint = null,
-            SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray) { StrokeThickness = 1 },
+            SeparatorsPaint = xCheckBox.IsChecked == true ?  new SolidColorPaint(SKColors.LightSlateGray) { StrokeThickness = 1 } : null,
           }
         },
         YAxes = new Axis[]
@@ -300,11 +304,11 @@ namespace KegConfig.Page
             // MinLimit    = 0,    // 设置 Y 轴的最小值为 0
             // MaxLimit    = null, // 设置为 null，以便自动调节最大值
             //SeparatorsPaint = null,
-            SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray)
+            SeparatorsPaint = yCheckBox.IsChecked == true ? new SolidColorPaint(SKColors.LightSlateGray)
             {
               StrokeThickness = 1,
               //PathEffect      = new DashEffect(new float[] { 3, 8 }) //设为虚线，3和8为实线和留空大小
-            }
+            } : null
           },
           new ()
           {
@@ -408,6 +412,14 @@ namespace KegConfig.Page
       if (rQcheckBox.IsChecked != null && (bool)rQcheckBox.IsChecked) { Base.SetValue("dzsjtj", "rq", "1"); } else Base.SetValue("dzsjtj", "rq", "0");
 
       SetData();
+      UpViewModelData(_数据统计);
+    }
+
+    [Obsolete]
+    private void CheckBox_Click3(object sender, RoutedEventArgs e)
+    {
+      if (xCheckBox.IsChecked != null && (bool)xCheckBox.IsChecked) { Base.SetValue("dzsjtj", "x", "1"); } else Base.SetValue("dzsjtj", "x", "0");
+      if (yCheckBox.IsChecked != null && (bool)yCheckBox.IsChecked) { Base.SetValue("dzsjtj", "y", "1"); } else Base.SetValue("dzsjtj", "y", "0");
       UpViewModelData(_数据统计);
     }
 

@@ -487,9 +487,27 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"
                   Foreground="{DynamicResource TextForeground}"
-                  Text="系数：" />
+                  Text="X 轴：" />
                 <TextBlock
                   Grid.Row="3"
+                  Grid.Column="9"
+                  Height="20"
+                  Margin="0,3,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Foreground="{DynamicResource TextForeground}"
+                  Text="Y 轴：" />
+                <TextBlock
+                  Grid.Row="5"
+                  Grid.Column="9"
+                  Height="20"
+                  Margin="0,3,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  Foreground="{DynamicResource TextForeground}"
+                  Text="系数：" />
+                <TextBlock
+                  Grid.Row="6"
                   Grid.Column="9"
                   Height="20"
                   Margin="0,3,0,0"
@@ -501,11 +519,26 @@
                   x:Name="rQcheckBox"
                   Grid.Row="1"
                   Grid.Column="10"
+                  Height="20"
+                  HorizontalAlignment="Left"
+                  Style="{DynamicResource CheckBoxStyle}" />
+                <CheckBox
+                  x:Name="xCheckBox"
+                  Grid.Row="2"
+                  Grid.Column="10"
+                  Height="20"
+                  HorizontalAlignment="Left"
+                  Style="{DynamicResource CheckBoxStyle}" />
+                <CheckBox
+                  x:Name="yCheckBox"
+                  Grid.Row="3"
+                  Grid.Column="10"
+                  Height="20"
                   HorizontalAlignment="Left"
                   Style="{DynamicResource CheckBoxStyle}" />
                 <local:DoubleNumericUpDown
                   x:Name="nud"
-                  Grid.Row="2"
+                  Grid.Row="5"
                   Grid.Column="10"
                   Width="62"
                   HorizontalAlignment="Left"
@@ -517,16 +550,17 @@
                   Value="4.50" />
                 <ComboBox
                   x:Name="comboBox"
-                  Grid.Row="3"
+                  Grid.Row="6"
                   Grid.RowSpan="2"
                   Grid.Column="10"
                   Width="70"
                   Height="NaN"
-                  Margin="0,2,0,0"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top"
-                  Foreground="{DynamicResource TextForeground}"
-                  Style="{DynamicResource RoundComboBox}">
+                          Margin="0,3,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          Foreground="{DynamicResource TextForeground}"
+                  Style="{DynamicResource RoundComboBox}"
+                          FontSize="12">
                   <ComboBoxItem Content="15 天" />
                   <ComboBoxItem Content="30 天" />
                   <ComboBoxItem Content="60 天" />

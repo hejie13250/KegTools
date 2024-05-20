@@ -1401,20 +1401,10 @@ namespace KegConfig.Page
 
       var text     = string.Empty;
       var filePath = $"{_appPath}\\configs\\候选序号.txt";
-      // text = comboBox3.Items.Cast<object>().Aggregate(text, (current, item) => current + $"\n{item}".Replace("System.Windows.Controls.ComboBoxItem: ",""));
       text = comboBox3.Items.Cast<object>().Aggregate(text, (current, item) => current + $"\n{(item as ComboBoxItem)?.Content}");
 
       text = text.Trim('\n');
       File.WriteAllText(filePath, text);
-
-      // comboBox3.Items.Clear();
-      // using StreamReader sr = new(filePath);
-      // while (sr.ReadLine() is { } line)
-      // {
-      //   ComboBoxItem item = new() { Content = line };
-      //   comboBox3.Items.Add(item);
-      // }
-
     }
 
     private void 添加到预设_Click(object sender, RoutedEventArgs e)

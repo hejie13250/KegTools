@@ -92,32 +92,7 @@
         Height="24"
         Margin="5,0,0,0"
         Foreground="{DynamicResource TextForeground}"
-        SelectedIndex="0"
-        Style="{DynamicResource RoundComboBox}">
-        <ComboBoxItem Content="反查方案快键" />
-        <ComboBoxItem Content="换皮肤快键" />
-        <ComboBoxItem Content="在线查找快键" />
-        <ComboBoxItem Content="方案选择快键" />
-        <ComboBoxItem Content="手动加词条快键" />
-        <ComboBoxItem Content="候选窗口调大快键" />
-        <ComboBoxItem Content="候选窗口调小快键" />
-        <ComboBoxItem Content="上屏反查字段快键" />
-        <ComboBoxItem Content="调整词条置顶快键" />
-        <ComboBoxItem Content="删除方案或词条快键" />
-        <ComboBoxItem Content="进入英文长句态快键" />
-        <ComboBoxItem Content="上屏后再取坐标快键" />
-        <ComboBoxItem Content="截图候选窗口上屏快键" />
-        <ComboBoxItem Content="截图选中候选上屏快键" />
-        <ComboBoxItem Content="截图选中反查上屏快键" />
-        <ComboBoxItem Content="设置截候选图上屏快键" />
-        <ComboBoxItem Content="设置上屏反查字段快键" />
-        <ComboBoxItem Content="打开文字配置界面快键" />
-        <ComboBoxItem Content="显示或隐藏状态条快键" />
-        <ComboBoxItem Content="显示或隐藏反查字段快键" />
-        <ComboBoxItem Content="状态栏回到主屏右下角快键" />
-        <ComboBoxItem Content="获取使用说明重新配置快键" />
-        <ComboBoxItem Content="锁定当前进程为TSF跟随快键" />
-      </ComboBox>
+        Style="{DynamicResource RoundComboBox}" />
       <Button
         Width="auto"
         Height="24"
@@ -1284,7 +1259,7 @@
                     Style="{DynamicResource RoundTextBox}"
                     Tag="密码前缀"
                     TextWrapping="Wrap"
-                    ToolTip="解锁密码为：前缀+时间后缀，默认前缀是wjh，也可自定义。例如早上7:25分解锁，后缀即为0725，密码则是：wjh0725" />
+                    ToolTip="解锁密码为：前缀+2025+时间后缀，默认前缀是wjh，也可自定义。例如早上7:25分解锁，后缀即为0725，密码则是：wjh20250725" />
                 </StackPanel>
 
               </StackPanel>
